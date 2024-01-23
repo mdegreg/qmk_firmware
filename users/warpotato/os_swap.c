@@ -25,7 +25,7 @@ enum OS {
 
 int active_os = OS_WINDOWS;
 int os_alt_tab_key = KC_LALT;
-int os_shortcut_key = KC_LCTRL;
+int os_shortcut_key = KC_LCTL;
 int os_showallwins_key = LGUI(KC_TAB);
 
 void set_os(int os){
@@ -33,7 +33,7 @@ void set_os(int os){
         case OS_WINDOWS:
             active_os = OS_WINDOWS;
             os_alt_tab_key = KC_LALT;
-            os_shortcut_key = KC_LCTRL;
+            os_shortcut_key = KC_LCTL;
             os_showallwins_key = LGUI(KC_TAB);
             break;
         case OS_MAC:

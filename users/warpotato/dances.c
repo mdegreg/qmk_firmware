@@ -13,7 +13,7 @@
 
 tap dance_state[MAX_COUNT_TAPDANCES];
 
-uint8_t dance_step(qk_tap_dance_state_t *state) {
+uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
@@ -31,7 +31,7 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-void os_modkey_on_dance(qk_tap_dance_state_t *state, uint16_t code) {
+void os_modkey_on_dance(tap_dance_state_t *state, uint16_t code) {
     if(state->count == 3) {
         tap_code16(code);
         tap_code16(code);
@@ -50,7 +50,7 @@ void os_modkey_on_dance(qk_tap_dance_state_t *state, uint16_t code) {
 #endif
 }
 
-void os_modkey_dance_finished(qk_tap_dance_state_t *state, uint16_t code, int dance_index) {
+void os_modkey_dance_finished(tap_dance_state_t *state, uint16_t code, int dance_index) {
 
     #if CONSOLE_ENABLE
     uprintf("Received code: %u\n", code);
@@ -85,7 +85,7 @@ void os_modkey_dance_finished(qk_tap_dance_state_t *state, uint16_t code, int da
     }
 }
 
-void os_modkey_dance_reset(qk_tap_dance_state_t *state, uint16_t code, int dance_index) {
+void os_modkey_dance_reset(tap_dance_state_t *state, uint16_t code, int dance_index) {
     wait_ms(10);
     #if CONSOLE_ENABLE
     uprintf("Received code: %u\n", code);
@@ -119,7 +119,7 @@ void os_modkey_dance_reset(qk_tap_dance_state_t *state, uint16_t code, int dance
     dance_state[dance_index].step = 0;
 }
 
-void charswap_dance_finished(qk_tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index) {
+void charswap_dance_finished(tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index) {
     dance_state[dance_index].step = dance_step(state);
     switch (dance_state[dance_index].step) {
         case SINGLE_TAP: register_code16(base_code); break;
@@ -129,7 +129,7 @@ void charswap_dance_finished(qk_tap_dance_state_t *state, uint16_t base_code, ui
     }
 }
 
-void charswap_dance_reset(qk_tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index) {
+void charswap_dance_reset(tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index) {
     wait_ms(10);
     switch (dance_state[dance_index].step) {
         case SINGLE_TAP: unregister_code16(base_code); break;
