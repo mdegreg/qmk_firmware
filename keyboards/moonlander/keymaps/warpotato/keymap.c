@@ -638,7 +638,7 @@ void dance_bootloader_finished(tap_dance_state_t *state, void *user_data);
 void dance_bootloader_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_BOOTLOADER].step = dance_step(state);
     switch (dance_state[DNC_BOOTLOADER].step) {
-        case DOUBLE_HOLD: bootloader_jump(); break;
+        case DOUBLE_HOLD: reset_keyboard(); break;
     }
 }
 
