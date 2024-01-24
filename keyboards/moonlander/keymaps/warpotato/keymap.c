@@ -6,7 +6,6 @@
 #include "version.h"
 
 #ifndef SUPER_ALT_TAB_INITIALIZED
-#define SUPER_ALT_TAB_INITIALIZED
 #include "alttab.h"
 #endif
 

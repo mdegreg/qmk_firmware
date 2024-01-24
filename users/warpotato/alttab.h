@@ -1,3 +1,5 @@
+#define SUPER_ALT_TAB_INITIALIZE
+
 enum super_alt_tab_os {
     SAT_WIN,
     SAT_MAC

@@ -2,7 +2,10 @@
   Set any config.h overrides for your specific keymap here.
   See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
+#if ORYX_ENABLE
 #define ORYX_CONFIGURATOR
+#endif
+
 #undef RGB_DISABLE_TIMEOUT
 #define RGB_DISABLE_TIMEOUT 600000
 #define TAPPING_TOGGLE 1
