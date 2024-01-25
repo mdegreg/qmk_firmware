@@ -189,8 +189,6 @@ void set_layer_color(int layer) {
 bool rgb_matrix_indicators_user(void) {
     int current_layer;
 
-    if (keyboard_config.disable_layer_led) { return true; }
-
     current_layer = biton32(layer_state);
     if (0 <= current_layer && current_layer <= getarraylength(ledmap)) {
         set_layer_color(current_layer);
