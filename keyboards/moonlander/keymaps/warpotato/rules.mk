@@ -3,8 +3,7 @@
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
-ORYX_ENABLE = no
-RGB_MATRIX_CUSTOM_KB = no
+ORYX_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 SRC = matrix.c
@@ -12,3 +11,10 @@ SRC += alttab.c
 SRC += modifiers.c
 SRC += os_swap.c
 SRC += dances.c
+
+ifeq ($(strip $(ORYX_ENABLE)), yes)
+    RAW_ENABLE := yes
+    SRC += oryx.c
+	OPT_DEFS += -DORYX_CONFIGURATOR
+	OPT_DEFS += -DORYX_ENABLE
+endif

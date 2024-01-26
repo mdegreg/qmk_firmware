@@ -3,6 +3,10 @@
 #include QMK_KEYBOARD_H
 #endif
 
+#ifdef ORYX_ENABLE
+#include "oryx.h"
+#endif
+
 #include "version.h"
 
 #ifndef SUPER_ALT_TAB_INITIALIZED
@@ -15,7 +19,9 @@
 #include "os_swap.h"
 #endif
 
+#ifndef DANCES_INITIALIZED
 #include "dances.h"
+#endif
 
 #ifndef DANCES_TAPTYPES_INITIALIZED
 #include "dances_taptypes.h"
@@ -297,7 +303,9 @@ HSV os_color_mac = {HSV_CHILLGREEN};
 HSV (*os_indicator_hsv_color) = {&os_color_win};
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-
+#    ifdef ORYX_ENABLE
+    layer_state_set_oryx(state);
+#    endif
   if (layer_state_is(OS_MAC_LAYOUT)){
     set_os(OS_MAC);
     os_indicator_hsv_color = &os_color_mac;
@@ -352,6 +360,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+#ifdef ORYX_ENABLE
+  process_record_oryx(keycode, record);
+#endif
 #if CONSOLE_ENABLE
   uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n",
             keycode,

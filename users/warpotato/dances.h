@@ -1,3 +1,7 @@
+#pragma once
+
+#define DANCES_INITIALIZED
+
 #ifndef KEYBOARD_HEADERS_INITIALIZED
 #define KEYBOARD_HEADERS_INITIALIZED
 #include QMK_KEYBOARD_H
@@ -16,4 +20,3 @@ void os_modkey_dance_reset(tap_dance_state_t *state, uint16_t code, int dance_in
 
 void charswap_dance_finished(tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index);
 void charswap_dance_reset(tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index);
-
