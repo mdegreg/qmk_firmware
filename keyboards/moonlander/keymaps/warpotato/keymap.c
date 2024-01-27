@@ -42,6 +42,7 @@ enum {
     OS_WIN_LAYOUT,
     OS_MAC_LAYOUT,
     GAMING_LAYOUT,
+    FKEYS_GAMING,
     NUMKEYS_LAYOUT,
     FKEYS_LAYOUT,
     UTIL_LAYOUT
@@ -51,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [OS_WIN_LAYOUT] = LAYOUT_moonlander(
       // baseline layout - mostly qwerty, with some keys shifted to emphasize
       // left hand typing + habitual movements
-    TD(DANCE_0),            KC_1,           KC_2,           KC_3,               KC_4,           KC_5,                           KC_6,                           KC_BSPC,  KC_7,        KC_8,                  KC_9,           KC_0,           KC_TRANSPARENT, KC_PGUP,
-    KC_TAB,                 KC_Q,           KC_W,           KC_E,               KC_R,           KC_T,                           KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                  KC_O,           KC_P,           KC_BSLS,      KC_PGDN,
-    KC_CAPS_LOCK,           KC_A,           KC_S,           KC_D,               TD(DNC_FIND),   KC_G,                           KC_H,                           KC_MINUS,   KC_J,        KC_K,                  KC_L,           KC_SCLN,      KC_QUOTE,       KC_TRANSPARENT,
-    SC_LSPO,                KC_Z,           TD(DANCE_3),    TD(DANCE_4),        TD(DANCE_5),    KC_B,                                                                       KC_N,        KC_M,                  KC_COMMA,       KC_DOT,         KC_SLASH,       SC_RSPC,
-    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TT(FKEYS_LAYOUT),                               KC_BSPC,                      KC_BSPC,               TD(DNC_RH_FNSWAP),     KC_LBRC,    KC_RBRC,    KC_TRANSPARENT, KC_LGUI,
+    TD(DANCE_0),            KC_1,           KC_2,           KC_3,               KC_4,           KC_5,                           KC_6,                           KC_BSPC,    KC_7,        KC_8,                  KC_9,       KC_0,      KC_TRANSPARENT, KC_PGUP,
+    KC_TAB,                 KC_Q,           KC_W,           KC_E,               KC_R,           KC_T,                           KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                  KC_O,       KC_P,      KC_BSLS,        KC_PGDN,
+    KC_CAPS_LOCK,           KC_A,           KC_S,           KC_D,               TD(DNC_FIND),   KC_G,                           KC_H,                           KC_MINUS,   KC_J,        KC_K,                  KC_L,       KC_SCLN,   KC_QUOTE,       KC_TRANSPARENT,
+    SC_LSPO,                KC_Z,           TD(DANCE_3),    TD(DANCE_4),        TD(DANCE_5),    KC_B,                                                                       KC_N,        KC_M,                  KC_COMMA,   KC_DOT,    KC_SLASH,       SC_RSPC,
+    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TT(FKEYS_LAYOUT),                               KC_BSPC,                        KC_BSPC,                 TD(DNC_RH_FNSWAP),     KC_LBRC,    KC_RBRC,   KC_TRANSPARENT, KC_LGUI,
                                                                                 TD(DANCE_7),    LT(NUMKEYS_LAYOUT, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
@@ -74,12 +75,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // gaming layout; adding additional access for number keys and
       // eliminating most tapdance options to reduce input lag.
       // set up to allow easy access for number and fn key layers
-    KC_ESCAPE,              KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
-    KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_7,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
-    KC_NO,                  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_LSFT,              KC_TRANSPARENT, KC_X,           KC_C,           KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_LCTL,               KC_LALT,        KC_TRANSPARENT, MO(3),          MO(4),                          KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                            KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+    KC_ESCAPE,       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_7,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
+    KC_NO,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_LSFT,         KC_TRANSPARENT, KC_X,           KC_C,               KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_LCTL,         KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_LAYOUT), MO(FKEYS_GAMING),               KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                         KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+  [FKEYS_GAMING] = LAYOUT_moonlander(
+      // traditional 10 key numpad plus fn-key access, gaming layout
+    KC_TRANSPARENT,  KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_0,           KC_PGUP,        KC_EQUAL,       KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_PGDN,        KC_MINUS,       KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                     KC_TAB,         KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [NUMKEYS_LAYOUT] = LAYOUT_moonlander(
       // phone-style numpad plus arrowkey layer
@@ -92,12 +102,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [FKEYS_LAYOUT] = LAYOUT_moonlander(
       // traditional 10 key numpad plus fn-key access, general layout
-    KC_TRANSPARENT,         KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,         KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,         KC_0,           KC_PGUP,        KC_EQUAL,       TD(DNC_CURLY),  KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, WK_PYTYPEDEF,   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,         KC_TRANSPARENT, KC_PGDN,      KC_MINUS,       TD(DNC_SQUARE), KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,         KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,                          KC_TRANSPARENT, KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,         KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_6,                           KC_TRANSPARENT, KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,         S(KC_1),        S(KC_2),        S(KC_3),        S(KC_4),        S(KC_5),        S(KC_6),                        KC_TRANSPARENT, S(KC_7),        S(KC_8),        S(KC_9),        S(KC_0),        KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, TD(DNC_CURLY),  TD(DNC_SQUARE), KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                            KC_TAB,         KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TAB
+                                                                            KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [UTIL_LAYOUT] = LAYOUT_moonlander(
       // Quick access for momentary toggle off of base layer
@@ -213,16 +223,38 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}
     },
 
+    [FKEYS_GAMING] = {
+        {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_MAGENTA}, {HSV_ORANGE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_RED}, {HSV_OFF}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_GREEN}, {HSV_GREEN}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_YELLOW}, {HSV_YELLOW}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF}, {HSV_OFF},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF},
+        {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
+        {HSV_RED},
+
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}
+    },
+
     [NUMKEYS_LAYOUT] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_ORANGE},
+        {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
         {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_OFF}, {HSV_ORANGE},
         {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_WHITE},
         {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_LIGHTBLUE}, {HSV_WHITE},
         {HSV_OFF}, {HSV_OFF}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_WHITE},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_LIGHTBLUE},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF},
+        {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
+        {HSV_RED},
 
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
@@ -236,25 +268,25 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     },
 
     [FKEYS_LAYOUT] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_RED}, {HSV_OFF}, {HSV_OFF},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_GREEN}, {HSV_GREEN}, {HSV_WHITE},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_YELLOW}, {HSV_YELLOW}, {HSV_WHITE},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF},
-        {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF},
+        {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE},
+        {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
+        {HSV_RED},
 
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_YELLOW}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}
+        {HSV_GREEN}, {HSV_GREEN}, {HSV_OFF}, {HSV_MAGENTA}, {HSV_CHILLGREEN},
+        {HSV_OFF}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF},
+        {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
+        {HSV_PALEMAGENTA}, {HSV_PALEORANGE}, {HSV_ORANGE},
+        {HSV_RED}
     },
 
     [UTIL_LAYOUT] = {
@@ -331,10 +363,10 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (is_caps_lock_on() && (get_highest_layer(layer_state) == OS_WIN_LAYOUT || get_highest_layer(layer_state) == OS_MAC_LAYOUT)) {
+    if (is_caps_lock_on() && (get_highest_layer(layer_state) != UTIL_LAYOUT)) {
         rgb_matrix_set_color(2, RGB_RED);
     }
-
+  
     if (is_num_lock_on() && get_highest_layer(layer_state) == UTIL_LAYOUT){
         rgb_matrix_set_color(56, RGB_RED);
     }
@@ -343,6 +375,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (layer_state_is(FKEYS_LAYOUT)) {
         rgb_matrix_set_color(
             24,
+            (os_indicator_rgb_color).r,
+            (os_indicator_rgb_color).g,
+            (os_indicator_rgb_color).b
+        );
+        rgb_matrix_set_color(
+            60,
             (os_indicator_rgb_color).r,
             (os_indicator_rgb_color).g,
             (os_indicator_rgb_color).b
@@ -356,6 +394,14 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             (os_indicator_rgb_color).b
         );
     };
+    if (get_highest_layer(layer_state) != UTIL_LAYOUT) {
+        rgb_matrix_set_color(
+            40,
+            (os_indicator_rgb_color).r,
+            (os_indicator_rgb_color).g,
+            (os_indicator_rgb_color).b
+        );
+    }
     return false;
 }
 
@@ -375,7 +421,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   );
 #endif
   switch (keycode) {
-    case WK_PYTYPEDEF: if (record->event.pressed) {SEND_STRING("->");} else {}
     default:
       return true;
   }
