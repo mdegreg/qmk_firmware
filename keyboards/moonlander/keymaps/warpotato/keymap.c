@@ -42,6 +42,7 @@ enum {
     OS_WIN_LAYOUT,
     OS_MAC_LAYOUT,
     GAMING_LAYOUT,
+    NUMKEYS_GAMING,
     FKEYS_GAMING,
     NUMKEYS_LAYOUT,
     FKEYS_LAYOUT,
@@ -71,32 +72,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MT(MOD_LGUI, KC_GRAVE), KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LCTL,
                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, MT(MOD_LGUI, KC_DOT),   KC_TRANSPARENT
   ),
-  [GAMING_LAYOUT] = LAYOUT_moonlander(
-      // gaming layout; adding additional access for number keys and
-      // eliminating most tapdance options to reduce input lag.
-      // set up to allow easy access for number and fn key layers
-    KC_ESCAPE,       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
-    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_7,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
-    KC_NO,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_LSFT,         KC_TRANSPARENT, KC_X,           KC_C,               KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_LCTL,         KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_LAYOUT), MO(FKEYS_GAMING),               KC_BSPC,                        KC_BSPC,                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                         KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
-  ),
-  [FKEYS_GAMING] = LAYOUT_moonlander(
-      // traditional 10 key numpad plus fn-key access, gaming layout
-    KC_TRANSPARENT,  KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,  KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,  KC_TRANSPARENT, KC_0,           KC_PGUP,        KC_EQUAL,       KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_PGDN,        KC_MINUS,       KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                     KC_TAB,         KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
-  ),
   [NUMKEYS_LAYOUT] = LAYOUT_moonlander(
       // phone-style numpad plus arrowkey layer
     KC_TRANSPARENT,     KC_1,           KC_2,           KC_3,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,     KC_4,           KC_5,           KC_6,           KC_TRANSPARENT, KC_TRANSPARENT, KC_PGUP,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_7,           KC_8,           KC_9,           KC_UP,          C(KC_C),        KC_PGDN,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_TRANSPARENT, KC_0,           KC_LEFT,        KC_DOWN,        KC_RIGHT,                                                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_7,           KC_8,           KC_9,           TD(DNC_UP),     C(KC_C),        KC_PGDN,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_TRANSPARENT, KC_0,           TD(DNC_LEFT),   TD(DNC_DOWN),   TD(DNC_RIGHT),                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                   KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -108,6 +89,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, TD(DNC_CURLY),  TD(DNC_SQUARE), KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                             KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+  [GAMING_LAYOUT] = LAYOUT_moonlander(
+      // gaming layout; adding additional access for number keys and
+      // eliminating most tapdance options to reduce input lag.
+      // set up to allow easy access for number and fn key layers
+    KC_ESCAPE,       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_7,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
+    KC_NO,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_LSFT,         KC_TRANSPARENT, KC_X,           KC_C,               KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_LCTL,         KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_GAMING), MO(FKEYS_GAMING),               KC_BSPC,                        KC_BSPC,                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                         KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+  [FKEYS_GAMING] = LAYOUT_moonlander(
+      // traditional 10 key numpad plus fn-key access, gaming layout
+    KC_TRANSPARENT,  KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F6,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         KC_F12,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_0,           KC_PGUP,        KC_EQUAL,       KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_PGDN,        KC_MINUS,       KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                     KC_TAB,         KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+  [NUMKEYS_GAMING] = LAYOUT_moonlander(
+      // phone-style numpad plus arrowkey layer
+    KC_TRANSPARENT,     KC_1,           KC_2,           KC_3,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_4,           KC_5,           KC_6,           KC_TRANSPARENT, KC_TRANSPARENT, KC_PGUP,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_7,           KC_8,           KC_9,           KC_UP,          C(KC_C),        KC_PGDN,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_TRANSPARENT, KC_0,           KC_LEFT,        KC_DOWN,        KC_RIGHT,                                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                   KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [UTIL_LAYOUT] = LAYOUT_moonlander(
       // Quick access for momentary toggle off of base layer
@@ -201,6 +211,50 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_RED}
     },
 
+    [NUMKEYS_LAYOUT] = {
+        {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF}, {HSV_ORANGE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE},
+        {HSV_OFF}, {HSV_OFF}, {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_WHITE},
+        {HSV_OFF}, {HSV_OFF}, {HSV_RED}, {HSV_MINTGREEN},
+        {HSV_OFF}, {HSV_GREEN}, {HSV_GREEN},
+        {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
+        {HSV_RED},
+
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
+        {HSV_OFF}
+    },
+
+    [FKEYS_LAYOUT] = {
+        {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_ORANGE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN},
+        {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
+        {HSV_RED},
+               
+        {HSV_GREEN}, {HSV_GREEN}, {HSV_OFF}, {HSV_MAGENTA}, {HSV_CHILLGREEN},
+        {HSV_OFF}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
+        {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
+        {HSV_RED}
+    },
+
     [GAMING_LAYOUT] = {
         {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_MAGENTA}, {HSV_ORANGE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_RED}, {HSV_WHITE}, {HSV_ORANGE},
@@ -245,7 +299,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}
     },
 
-    [NUMKEYS_LAYOUT] = {
+    [NUMKEYS_GAMING] = {
         {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
         {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF}, {HSV_ORANGE},
         {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_WHITE},
@@ -263,30 +317,8 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}
-    },
-
-    [FKEYS_LAYOUT] = {
-        {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_ORANGE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN},
-        {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
-        {HSV_RED},
-               
-        {HSV_GREEN}, {HSV_GREEN}, {HSV_OFF}, {HSV_MAGENTA}, {HSV_CHILLGREEN},
-        {HSV_OFF}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
-        {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
-        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
-        {HSV_RED}
     },
 
     [UTIL_LAYOUT] = {
@@ -726,6 +758,76 @@ void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
     );
 }
 
+void on_dance_ua(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_UP, KC_UP, os_bksp_mod, DNC_UP
+    );
+}
+
+void dance_ua_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        state, KC_UP, KC_UP, os_bksp_mod, DNC_UP
+    );
+}
+
+void dance_ua_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        state, KC_UP, KC_UP, os_bksp_mod, DNC_UP
+    );
+}
+
+void on_dance_la(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+    );
+}
+
+void dance_la_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+    );
+}
+
+void dance_la_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+    );
+}
+void on_dance_da(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_DOWN, KC_DOWN, os_bksp_mod, DNC_DOWN
+    );
+}
+
+void dance_da_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        state, KC_DOWN, KC_DOWN, os_bksp_mod, DNC_DOWN
+    );
+}
+
+void dance_da_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        state, KC_DOWN, KC_DOWN, os_bksp_mod, DNC_DOWN
+    );
+}
+
+void on_dance_ra(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+    );
+}
+
+void dance_ra_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+    );
+}
+
+void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+    );
+}
 
 
 tap_dance_action_t tap_dance_actions[] = {
@@ -742,4 +844,8 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_BOOTLOADER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_bootloader_finished, dance_bootloader_reset),
         [DNC_RH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rh_fnswap_finished, dance_rh_fnswap_reset),
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
+        [DNC_UP] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ua, dance_ua_finished, dance_ua_reset),
+        [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
+        [DNC_DOWN] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_da, dance_da_finished, dance_da_reset),
+        [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
 };
