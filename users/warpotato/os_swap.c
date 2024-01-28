@@ -12,6 +12,8 @@
 #include "print.h"
 #endif
 
+#include "quantum_keycodes.h"
+
 /*
 Note that there is a builtin optional header that will declare functions for this
 
@@ -25,22 +27,22 @@ enum OS {
 
 int active_os = OS_WINDOWS;
 int os_alt_tab_key = KC_LALT;
-int os_shortcut_key = KC_LCTL;
 int os_showallwins_key = LGUI(KC_TAB);
+uint16_t os_bksp_mod = QK_LCTL;
 
 void set_os(int os){
     switch(os){
         case OS_WINDOWS:
             active_os = OS_WINDOWS;
             os_alt_tab_key = KC_LALT;
-            os_shortcut_key = KC_LCTL;
             os_showallwins_key = LGUI(KC_TAB);
+            os_bksp_mod = QK_LCTL;
             break;
         case OS_MAC:
             active_os = OS_MAC;
             os_alt_tab_key = KC_LGUI;
-            os_shortcut_key = KC_LGUI;
             os_showallwins_key = LCTL(KC_UP);
+            os_bksp_mod = QK_LALT;
             break;
     }
     set_super_alt_tab_init_key(os_alt_tab_key);

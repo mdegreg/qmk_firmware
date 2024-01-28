@@ -33,7 +33,7 @@ enum tap_dance_codes {
   DNC_SQUARE,
   DNC_BOOTLOADER,
   DNC_RH_FNSWAP,
-
+  DNC_BACKSPACE,
   /*
   ** Do not change or move from bottom of enum. **
 

@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,                 KC_Q,           KC_W,           KC_E,               KC_R,           KC_T,                           KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                  KC_O,       KC_P,      KC_BSLS,        KC_PGDN,
     KC_CAPS_LOCK,           KC_A,           KC_S,           KC_D,               TD(DNC_FIND),   KC_G,                           KC_H,                           KC_MINUS,   KC_J,        KC_K,                  KC_L,       KC_SCLN,   KC_QUOTE,       KC_TRANSPARENT,
     SC_LSPO,                KC_Z,           TD(DANCE_3),    TD(DANCE_4),        TD(DANCE_5),    KC_B,                                                                       KC_N,        KC_M,                  KC_COMMA,   KC_DOT,    KC_SLASH,       SC_RSPC,
-    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TT(FKEYS_LAYOUT),                               KC_BSPC,                        KC_BSPC,                 TD(DNC_RH_FNSWAP),     KC_LBRC,    KC_RBRC,   KC_TRANSPARENT, KC_LGUI,
+    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TT(FKEYS_LAYOUT),                               TD(DNC_BACKSPACE),              TD(DNC_BACKSPACE),       TD(DNC_RH_FNSWAP),     KC_LBRC,    KC_RBRC,   KC_TRANSPARENT, KC_LGUI,
                                                                                 TD(DANCE_7),    LT(NUMKEYS_LAYOUT, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_7,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
     KC_NO,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_LSFT,         KC_TRANSPARENT, KC_X,           KC_C,               KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_LCTL,         KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_LAYOUT), MO(FKEYS_GAMING),               KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_LCTL,         KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_LAYOUT), MO(FKEYS_GAMING),               KC_BSPC,                        KC_BSPC,                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                          KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [FKEYS_GAMING] = LAYOUT_moonlander(
@@ -94,8 +94,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUMKEYS_LAYOUT] = LAYOUT_moonlander(
       // phone-style numpad plus arrowkey layer
     KC_TRANSPARENT,     KC_1,           KC_2,           KC_3,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_4,           KC_5,           KC_6,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_7,           KC_8,           KC_9,           KC_UP,          KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_4,           KC_5,           KC_6,           KC_TRANSPARENT, KC_TRANSPARENT, KC_PGUP,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_7,           KC_8,           KC_9,           KC_UP,          C(KC_C),        KC_PGDN,                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,     KC_TRANSPARENT, KC_0,           KC_LEFT,        KC_DOWN,        KC_RIGHT,                                                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                   KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
@@ -175,7 +175,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW}, // 67
 
         // thumb keys
-        {HSV_PALEMAGENTA}, {HSV_PALEORANGE}, {HSV_ORANGE}, // 70
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE}, // 70
         {HSV_RED}  // right red key, 71
     },
 
@@ -197,7 +197,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
-        {HSV_PALEMAGENTA}, {HSV_PALEORANGE}, {HSV_ORANGE},
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
         {HSV_RED}
     },
 
@@ -247,12 +247,12 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
     [NUMKEYS_LAYOUT] = {
         {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
-        {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_OFF}, {HSV_ORANGE},
-        {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_WHITE},
-        {HSV_RED}, {HSV_RED}, {HSV_RED}, {HSV_LIGHTBLUE}, {HSV_WHITE},
-        {HSV_OFF}, {HSV_OFF}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_WHITE},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_LIGHTBLUE},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_OFF}, {HSV_ORANGE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE},
+        {HSV_OFF}, {HSV_OFF}, {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_WHITE},
+        {HSV_OFF}, {HSV_OFF}, {HSV_RED}, {HSV_MINTGREEN},
+        {HSV_OFF}, {HSV_GREEN}, {HSV_GREEN},
         {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
         {HSV_RED},
 
@@ -263,37 +263,37 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_PALEMAGENTA}, {HSV_PALEORANGE}, {HSV_ORANGE},
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
         {HSV_OFF}
     },
 
     [FKEYS_LAYOUT] = {
         {HSV_ORANGE}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_ORANGE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_ORANGE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN},
         {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
         {HSV_RED},
-
+               
         {HSV_GREEN}, {HSV_GREEN}, {HSV_OFF}, {HSV_MAGENTA}, {HSV_CHILLGREEN},
         {HSV_OFF}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_SEABLUE}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
+        {HSV_GREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
         {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
-        {HSV_PALEMAGENTA}, {HSV_PALEORANGE}, {HSV_ORANGE},
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
         {HSV_RED}
     },
 
     [UTIL_LAYOUT] = {
         {HSV_RED}, {HSV_LIGHTBLUE}, {HSV_ORANGE}, {HSV_RED}, {HSV_OFF},
         {HSV_OFF}, {HSV_ORANGE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_WHITE},
-        {HSV_OFF}, {HSV_SEABLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_WHITE},
+        {HSV_OFF}, {HSV_SEAGREEN}, {HSV_OFF}, {HSV_OFF}, {HSV_WHITE},
+        {HSV_OFF}, {HSV_SEAGREEN}, {HSV_OFF}, {HSV_OFF}, {HSV_WHITE},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_WHITE},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
@@ -304,7 +304,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}, {HSV_LIGHTBLUE}, {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN},
         {HSV_LIGHTBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE},
         {HSV_LIGHTBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF},
-        {HSV_SEABLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_SEAGREEN}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_RED}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
@@ -535,35 +535,15 @@ void dance_7_finished(tap_dance_state_t *state, void *user_data);
 void dance_7_reset(tap_dance_state_t *state, void *user_data);
 
 void on_dance_7(tap_dance_state_t *state, void *user_data) {
-    if(state->count == 3) {
-        tap_code16(KC_SPACE);
-        tap_code16(KC_SPACE);
-        tap_code16(KC_SPACE);
-    }
-    if(state->count > 3) {
-        tap_code16(KC_SPACE);
-    }
+    on_charswap_dance(state, KC_SPACE, KC_UNDS, DANCE_7);
 }
 
 void dance_7_finished(tap_dance_state_t *state, void *user_data) {
-    dance_state[DANCE_7].step = dance_step(state);
-    switch (dance_state[DANCE_7].step) {
-        case SINGLE_TAP: register_code16(KC_SPACE); break;
-        case SINGLE_HOLD: register_code16(KC_UNDS); break;
-        case DOUBLE_TAP: register_code16(KC_SPACE); register_code16(KC_SPACE); break;
-        case DOUBLE_SINGLE_TAP: tap_code16(KC_SPACE); register_code16(KC_SPACE);
-    }
+    charswap_dance_finished(state, KC_SPACE, KC_UNDS, DANCE_7);
 }
 
 void dance_7_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[DANCE_7].step) {
-        case SINGLE_TAP: unregister_code16(KC_SPACE); break;
-        case SINGLE_HOLD: unregister_code16(KC_UNDS); break;
-        case DOUBLE_TAP: unregister_code16(KC_SPACE); break;
-        case DOUBLE_SINGLE_TAP: unregister_code16(KC_SPACE); break;
-    }
-    dance_state[DANCE_7].step = 0;
+    charswap_dance_reset(state, KC_SPACE, KC_UNDS, DANCE_7);
 }
 
 void on_dance_8(tap_dance_state_t *state, void *user_data);
@@ -728,6 +708,26 @@ void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_RH_FNSWAP].step = 0;
 }
 
+void on_dance_backspace(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+    );
+}
+
+void dance_backspace_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+    );
+}
+
+void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+    );
+}
+
+
+
 tap_dance_action_t tap_dance_actions[] = {
         [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
         [DNC_FIND] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
@@ -741,4 +741,5 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_SQUARE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, squareswap_finished, squareswap_reset),
         [DNC_BOOTLOADER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_bootloader_finished, dance_bootloader_reset),
         [DNC_RH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rh_fnswap_finished, dance_rh_fnswap_reset),
+        [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
 };
