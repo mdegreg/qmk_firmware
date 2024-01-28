@@ -764,10 +764,15 @@ void on_dance_ua(tap_dance_state_t* state, void* user_data) {
     );
 }
 
-void dance_ua_finished(tap_dance_state_t* state, void* user_data) {
-    mod_charswap_dance_finished(
-        state, KC_UP, KC_UP, os_bksp_mod, DNC_UP
-    );
+void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
+    wait_ms(10);
+    switch (dance_state[DNC_BACKSPACE].step) {
+        case SINGLE_TAP:
+            unregister_code16(dance_backspace_active_key);
+            break;
+        case SINGLE_HOLD: break;
+        case DOUBLE_TAP: break;
+        case DOUBLE_SINGLE_TAP: unregister_code16(dance_backspace_active_key);
 }
 
 void dance_ua_reset(tap_dance_state_t* state, void* user_data) {
