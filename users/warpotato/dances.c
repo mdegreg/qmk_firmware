@@ -142,21 +142,25 @@ void charswap_dance_finished(tap_dance_state_t *state, uint16_t base_code, uint1
 void charswap_dance_reset(tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, int dance_index) {
     wait_ms(10);
     switch (dance_state[dance_index].step) {
-        case SINGLE_TAP: unregister_code16(base_code); break;
-        case SINGLE_HOLD: break;
+        case SINGLE_TAP:
+            unregister_code16(base_code);
+            break;
+        case SINGLE_HOLD:
+            break;
         case DOUBLE_TAP:
-        case DOUBLE_SINGLE_TAP: unregister_code16(base_code);
+        case DOUBLE_SINGLE_TAP:
+            unregister_code16(base_code);
     }
     dance_state[dance_index].step = 0;
 }
 
-void on_mod_charswap_dance(tap_dance_state_t* state, uint16_t base_code, uint16_t alt_code, uint16_t alt_mod, int dance_index) {
-    if(state->count == 3) {
+void on_mod_charswap_dance(tap_dance_state_t *state, uint16_t base_code, uint16_t alt_code, uint16_t alt_mod, int dance_index) {
+    if (state->count == 3) {
         tap_code16(base_code);
         tap_code16(base_code);
         tap_code16(base_code);
     }
-    if(state->count > 3) {
+    if (state->count > 3) {
         tap_code16(base_code);
     }
 }

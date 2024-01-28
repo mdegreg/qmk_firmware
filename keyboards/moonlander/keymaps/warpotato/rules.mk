@@ -5,7 +5,7 @@ COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
 ORYX_ENABLE = no
 TAP_DANCE_ENABLE = yes
-KEY_OVERRIDE_ENABLE = yes
+KEY_OVERRIDE_ENABLE = no
 SRC = matrix.c
 SRC += alttab.c
 SRC += modifiers.c
@@ -15,6 +15,6 @@ SRC += dances.c
 ifeq ($(strip $(ORYX_ENABLE)), yes)
     RAW_ENABLE := yes
     SRC += oryx.c
-	OPT_DEFS += -DORYX_CONFIGURATOR
+	OPT_DEFS += DORYX_CONFIGURATOR
 	OPT_DEFS += -DORYX_ENABLE
 endif
