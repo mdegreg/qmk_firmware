@@ -21,12 +21,12 @@ typedef struct {
 } tap;
 
 enum tap_dance_codes {
-  DANCE_0,
+  DNC_ESC_LS,
   DNC_FIND,
-  DANCE_3,
-  DANCE_4,
-  DANCE_5,
-  DANCE_7,
+  DNC_XCUT,
+  DNC_COPY,
+  DNC_CPS,
+  DNC_SPC,
   DNC_SUPER_ALT_TAB,
   DNC_RTN_L0,
   DNC_CURLY,
