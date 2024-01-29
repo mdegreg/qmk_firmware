@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
       // minor modifications for mac os; most are handled via generic tapdance defs,
-      // but ctrl/cmd swapping and layer switch cue are replaced here for simplicity
+      // but ctrl/cmd swapping and layer switch cue are replaced here for simplicity 
       // keeping this layer is handy for catching and triggering os-specific
       // keypress interception, even if its mostly duplicative
     KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
@@ -701,6 +701,7 @@ void dance_bootloader_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_BOOTLOADER].step = 0;
 }
 
+// Keep this as a tap dance because builtins can't send modified keycodes
 void dance_rh_fnswap_finished(tap_dance_state_t *state, void *user_data);
 void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data);
 
@@ -793,7 +794,6 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_CURLY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, curlyswap_finished, curlyswap_reset),
         [DNC_SQUARE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, squareswap_finished, squareswap_reset),
         [DNC_BOOTLOADER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_bootloader_finished, dance_bootloader_reset),
-        [DNC_RH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rh_fnswap_finished, dance_rh_fnswap_reset),
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
         [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
