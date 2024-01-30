@@ -13,17 +13,13 @@
 #endif
 
 #include "quantum_keycodes.h"
+#include "os_detection.h"
 
 /*
 Note that there is a builtin optional header that will declare functions for this
 
 https://docs.qmk.fm/#/feature_os_detection
 */
-
-enum OS {
-    OS_WINDOWS,
-    OS_MAC,
-};
 
 int active_os = OS_WINDOWS;
 int os_alt_tab_key = KC_LALT;
@@ -38,8 +34,8 @@ void set_os(int os){
             os_showallwins_key = LGUI(KC_TAB);
             os_bksp_mod = QK_LCTL;
             break;
-        case OS_MAC:
-            active_os = OS_MAC;
+        case OS_MACOS:
+            active_os = OS_MACOS;
             os_alt_tab_key = KC_LGUI;
             os_showallwins_key = LCTL(KC_UP);
             os_bksp_mod = QK_LALT;

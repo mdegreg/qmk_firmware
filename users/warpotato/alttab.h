@@ -1,4 +1,4 @@
-#define SUPER_ALT_TAB_INITIALIZE
+#pragma once
 
 enum super_alt_tab_os {
     SAT_WIN,

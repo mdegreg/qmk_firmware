@@ -3,13 +3,9 @@
 #include QMK_KEYBOARD_H
 #endif
 
-#ifndef OS_SWAP_INITIALIZED
 #include "os_swap.h"
-#endif
 
-#ifndef DANCES_TAPTYPES_INITIALIZED
 #include "dances_taptypes.h"
-#endif
 
 tap dance_state[MAX_COUNT_TAPDANCES];
 
@@ -133,7 +129,7 @@ void charswap_dance_finished(tap_dance_state_t *state, uint16_t base_code, uint1
     dance_state[dance_index].step = dance_step(state);
     switch (dance_state[dance_index].step) {
         case SINGLE_TAP: register_code16(base_code); break;
-        case SINGLE_HOLD: tap_code16(alt_code); break;
+        case SINGLE_HOLD: register_code16(alt_code); break;
         case DOUBLE_TAP:
         case DOUBLE_SINGLE_TAP: tap_code16(base_code); register_code16(base_code);
     }
@@ -146,6 +142,7 @@ void charswap_dance_reset(tap_dance_state_t *state, uint16_t base_code, uint16_t
             unregister_code16(base_code);
             break;
         case SINGLE_HOLD:
+            unregister_code16(alt_code);
             break;
         case DOUBLE_TAP:
         case DOUBLE_SINGLE_TAP:

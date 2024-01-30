@@ -1,4 +1,4 @@
-#define DANCES_TAPTYPES_INITIALIZED
+#pragma once
 
 enum {
     SINGLE_TAP = 1,
@@ -36,6 +36,8 @@ enum tap_dance_codes {
   DNC_BACKSPACE,
   DNC_LEFT,
   DNC_RIGHT,
+
+  DNC_SADHOP,
   /*
   ** Do not change or move from bottom of enum. **
 

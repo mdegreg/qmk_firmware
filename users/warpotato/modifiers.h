@@ -1,3 +1,5 @@
+#pragma once
+
 extern int moonlander_capslock_index;
 
 bool is_caps_lock_on(void);

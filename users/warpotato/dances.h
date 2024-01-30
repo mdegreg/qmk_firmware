@@ -1,15 +1,11 @@
 #pragma once
 
-#define DANCES_INITIALIZED
-
 #ifndef KEYBOARD_HEADERS_INITIALIZED
 #define KEYBOARD_HEADERS_INITIALIZED
 #include QMK_KEYBOARD_H
 #endif
 
-#ifndef DANCES_TAPTYPES_INITIALIZED
 #include "dances_taptypes.h"
-#endif
 
 uint8_t dance_step(tap_dance_state_t *state);
 extern tap dance_state[MAX_COUNT_TAPDANCES];

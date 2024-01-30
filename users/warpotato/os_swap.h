@@ -1,10 +1,6 @@
+#pragma once
 
-#define OS_SWAP_INITIALIZED
-
-enum OS {
-    OS_WINDOWS,
-    OS_MAC,
-};
+#include "os_detection.h"
 
 extern int active_os;
 extern int os_alt_tab_key;

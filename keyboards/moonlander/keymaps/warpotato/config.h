@@ -4,6 +4,10 @@
 */
 #pragma once
 
+#if CONSOLE_ENABLE
+#define OS_DETECTION_DEBUG_ENABLE
+#endif
+
 #undef RGB_DISABLE_TIMEOUT
 #define RGB_DISABLE_TIMEOUT 600000
 

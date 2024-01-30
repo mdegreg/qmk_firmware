@@ -8,24 +8,11 @@
 #endif
 
 #include "version.h"
-
-#ifndef SUPER_ALT_TAB_INITIALIZED
 #include "alttab.h"
-#endif
-
 #include "modifiers.h"
-
-#ifndef OS_SWAP_INITIALIZED
 #include "os_swap.h"
-#endif
-
-#ifndef DANCES_INITIALIZED
 #include "dances.h"
-#endif
-
-#ifndef DANCES_TAPTYPES_INITIALIZED
 #include "dances_taptypes.h"
-#endif
 
 #if CONSOLE_ENABLE
 #include "print.h"
@@ -35,7 +22,8 @@
 
 enum custom_keycodes {
   RGB_SLD = SAFE_RANGE,
-  WK_PYTYPEDEF,
+  STORE_SETUPS,
+  PRINT_SETUPS,
 };
 
 enum {
@@ -99,7 +87,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_LSFT,         KC_TRANSPARENT, KC_X,           KC_C,               KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_LCTL,         KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_GAMING), MO(FKEYS_GAMING),               KC_BSPC,                        KC_BSPC,                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                         KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+                                                                         KC_SPACE,       TD(DNC_SADHOP), KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+
   ),
   [FKEYS_GAMING] = LAYOUT_moonlander(
       // traditional 10 key numpad plus fn-key access, gaming layout
@@ -108,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT,  KC_TRANSPARENT, KC_0,           KC_PGUP,        KC_EQUAL,       KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_PGDN,        KC_MINUS,       KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                     KC_TAB,         KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [NUMKEYS_GAMING] = LAYOUT_moonlander(
       // phone-style numpad plus arrowkey layer
@@ -122,8 +111,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [UTIL_LAYOUT] = LAYOUT_moonlander(
       // Quick access for momentary toggle off of base layer
     TD(DNC_BOOTLOADER),     KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_NUM_LOCK,     KC_KP_SLASH,    KC_KP_ASTERISK, KC_NO,          KC_TRANSPARENT,
-    KC_AUDIO_VOL_UP,        KC_MEDIA_PREV_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_MEDIA_NEXT_TRACK,    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_TRANSPARENT,
-    KC_AUDIO_VOL_DOWN,      KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_TRANSPARENT,
+    KC_AUDIO_VOL_UP,        KC_MEDIA_PREV_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_MEDIA_NEXT_TRACK,    KC_TRANSPARENT, KC_TRANSPARENT, STORE_SETUPS,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_TRANSPARENT,
+    KC_AUDIO_VOL_DOWN,      KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, PRINT_SETUPS,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_TRANSPARENT,
     KC_AUDIO_MUTE,          KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_KP_ENTER,    KC_TRANSPARENT,
     KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_KP_0,        KC_KP_0,        KC_KP_DOT,      KC_KP_ENTER,    KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
@@ -140,6 +129,10 @@ void keyboard_post_init_user(void) {
   //debug_mouse=true;
   #endif
   rgb_matrix_enable();
+  os_variant_t current_os = detected_host_os();
+  if (current_os == OS_MACOS) {
+    layer_on(OS_MAC_LAYOUT);
+  }
 }
 
 // LEDs are assigned top-down by column, approximately, from outside to inside,
@@ -356,7 +349,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   layer_state_set_oryx(state);
 # endif
   if (layer_state_is(OS_MAC_LAYOUT)){
-    set_os(OS_MAC);
+    set_os(OS_MACOS);
     os_indicator_hsv_color = &os_color_mac;
   } else {
     set_os(OS_WINDOWS);
@@ -427,7 +420,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   process_record_oryx(keycode, record);
 #endif
 #if CONSOLE_ENABLE
-  uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n",
+    uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n",
             keycode,
             record->event.key.col,
             record->event.key.row,
@@ -435,7 +428,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             record->event.time,
             record->tap.interrupted,
             record->tap.count
-  );
+    );
+
+    switch (keycode) {
+        case STORE_SETUPS:
+            if (record->event.pressed) {
+                store_setups_in_eeprom();
+            }
+            return false;
+        case PRINT_SETUPS:
+            if (record->event.pressed) {
+                print_stored_setups();
+            }
+            return false;
+    }
 #endif
   switch (keycode) {
     default:
@@ -448,7 +454,14 @@ void matrix_scan_user(void) { // The very important timer.
     timeout_super_alt_tab();
 }
 
+/*
+* Control tapdances
+*
+* Used to move around  between layers, trigger swaps, and other control
+* flow type things.
+*/
 
+// for hopping to gaming layout
 void on_dance_0(tap_dance_state_t *state, void *user_data);
 void dance_0_finished(tap_dance_state_t *state, void *user_data);
 void dance_0_reset(tap_dance_state_t *state, void *user_data);
@@ -485,6 +498,104 @@ void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_ESC_LS].step = 0;
 }
 
+// allowing for OS swap and return to base layer from
+// higher layers consistently
+void dance_layerswap_finished(tap_dance_state_t *state, void *user_data);
+void dance_layerswap_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_layerswap_finished(tap_dance_state_t *state, void *user_data) {
+    int current_layer;
+
+    dance_state[DNC_RTN_L0].step = dance_step(state);
+
+    switch (dance_state[DNC_RTN_L0].step) {
+        case SINGLE_TAP:
+            if (layer_state_is(GAMING_LAYOUT)) {
+                // noop
+            } else if (get_highest_layer(layer_state) == UTIL_LAYOUT) {
+                layer_off(UTIL_LAYOUT);
+            } else {
+                layer_on(UTIL_LAYOUT);
+            }
+            break;
+        case SINGLE_HOLD:
+            layer_on(UTIL_LAYOUT);
+            break;
+        case DOUBLE_TAP:
+            current_layer = get_highest_layer(layer_state);
+            if (current_layer == OS_WIN_LAYOUT) {
+                layer_on(OS_MAC_LAYOUT);
+            } else if (current_layer == OS_MAC_LAYOUT) {
+                layer_off(OS_MAC_LAYOUT);
+            } else {
+                layer_state_set(1 << OS_WIN_LAYOUT | layer_state_is(OS_MAC_LAYOUT) << OS_MAC_LAYOUT );
+            }
+            break;
+        #if CONSOLE_ENABLE
+        case TRIPLE_TAP:
+            uprintf("layer state: %d\n", layer_state);
+            uprintf("mac state: %d\n", layer_state_is(OS_MAC_LAYOUT));
+            uprintf("layer state: %d\n", 1 << OS_WIN_LAYOUT | layer_state_is(OS_MAC_LAYOUT) << OS_MAC_LAYOUT );
+            break;
+        #endif
+    }
+}
+
+
+void dance_layerswap_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[DNC_RTN_L0].step) {
+        #if CONSOLE_ENABLE
+        case SINGLE_TAP:
+            // noop
+            break;
+        #endif
+        case SINGLE_HOLD:
+            layer_off(UTIL_LAYOUT);
+            break;
+        case DOUBLE_TAP:
+            // noop
+            break;
+    }
+    dance_state[DNC_RTN_L0].step = 0;
+}
+
+/*
+* Utility tapdances
+*
+* These are generally used for general/productivity layers for
+* making various actions and swaps easier to use, and generally
+* being comfier.
+*/
+
+// Keep this as a tap dance because builtins can't send modified keycodes
+// For allowing send of a handy lil : while also allowing for swap to
+// symbol layer
+void dance_rh_fnswap_finished(tap_dance_state_t *state, void *user_data);
+void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_rh_fnswap_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[DNC_RH_FNSWAP].step = dance_step(state);
+    switch (dance_state[DNC_RH_FNSWAP].step) {
+        case SINGLE_TAP:
+            register_code16(S(KC_SCLN));
+            break;
+        case SINGLE_HOLD: layer_on(FKEYS_LAYOUT); break;
+    }
+}
+
+void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[DNC_RH_FNSWAP].step) {
+        case SINGLE_TAP:
+            unregister_code16(S(KC_SCLN));
+            break;
+        case SINGLE_HOLD: layer_off(FKEYS_LAYOUT); break;
+    }
+    dance_state[DNC_RH_FNSWAP].step = 0;
+}
+
+// keyboard shortcut triggers on hold
 void on_dance_2(tap_dance_state_t *state, void *user_data);
 void dance_2_finished(tap_dance_state_t *state, void *user_data);
 void dance_2_reset(tap_dance_state_t *state, void *user_data);
@@ -567,6 +678,8 @@ void on_dance_8(tap_dance_state_t *state, void *user_data);
 void dance_8_finished(tap_dance_state_t *state, void *user_data);
 void dance_8_reset(tap_dance_state_t *state, void *user_data);
 
+// because alt tab is effortful, and i needed to figure out
+// how more complex behaviors work within qmk
 void on_dance_8(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         trigger_super_alt_tab(true);
@@ -599,7 +712,6 @@ void dance_8_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_SUPER_ALT_TAB].step = 0;
 }
 
-
 void curlyswap_finished(tap_dance_state_t *state, void *user_data);
 void curlyswap_reset(tap_dance_state_t *state, void *user_data);
 
@@ -623,69 +735,10 @@ void squareswap_reset(tap_dance_state_t *state, void *user_data) {
     charswap_dance_reset(state, KC_LBRC, KC_RBRC, DNC_SQUARE);
 }
 
-
-void dance_layerswap_finished(tap_dance_state_t *state, void *user_data);
-void dance_layerswap_reset(tap_dance_state_t *state, void *user_data);
-
-void dance_layerswap_finished(tap_dance_state_t *state, void *user_data) {
-    int current_layer;
-
-    dance_state[DNC_RTN_L0].step = dance_step(state);
-
-    switch (dance_state[DNC_RTN_L0].step) {
-        case SINGLE_TAP:
-            if (layer_state_is(GAMING_LAYOUT)) {
-                // noop
-            } else if (get_highest_layer(layer_state) == UTIL_LAYOUT) {
-                layer_off(UTIL_LAYOUT);
-            } else {
-                layer_on(UTIL_LAYOUT);
-            }
-            break;
-        case SINGLE_HOLD:
-            layer_on(UTIL_LAYOUT);
-            break;
-        case DOUBLE_TAP:
-            current_layer = get_highest_layer(layer_state);
-            if (current_layer == OS_WIN_LAYOUT) {
-                layer_on(OS_MAC_LAYOUT);
-            } else if (current_layer == OS_MAC_LAYOUT) {
-                layer_off(OS_MAC_LAYOUT);
-            } else {
-                layer_state_set(1 << OS_WIN_LAYOUT | layer_state_is(OS_MAC_LAYOUT) << OS_MAC_LAYOUT );
-            }
-            break;
-        #if CONSOLE_ENABLE
-        case TRIPLE_TAP:
-            uprintf("layer state: %d\n", layer_state);
-            uprintf("mac state: %d\n", layer_state_is(OS_MAC_LAYOUT));
-            uprintf("layer state: %d\n", 1 << OS_WIN_LAYOUT | layer_state_is(OS_MAC_LAYOUT) << OS_MAC_LAYOUT );
-            break;
-        #endif
-    }
-}
-
-
-void dance_layerswap_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[DNC_RTN_L0].step) {
-        #if CONSOLE_ENABLE
-        case SINGLE_TAP:
-            // noop
-            break;
-        #endif
-        case SINGLE_HOLD:
-            layer_off(UTIL_LAYOUT);
-            break;
-        case DOUBLE_TAP:
-            // noop
-            break;
-    }
-    dance_state[DNC_RTN_L0].step = 0;
-}
-
-
+// reduce accidental bootloader triggers while having it more accessible
+// without a paperclip
 void dance_bootloader_finished(tap_dance_state_t *state, void *user_data);
+void dance_bootloader_reset(tap_dance_state_t *state, void *user_data);
 
 void dance_bootloader_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_BOOTLOADER].step = dance_step(state);
@@ -694,49 +747,26 @@ void dance_bootloader_finished(tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_bootloader_reset(tap_dance_state_t *state, void *user_data);
-
 void dance_bootloader_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     dance_state[DNC_BOOTLOADER].step = 0;
 }
 
-// Keep this as a tap dance because builtins can't send modified keycodes
-void dance_rh_fnswap_finished(tap_dance_state_t *state, void *user_data);
-void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data);
+// a few navigation utils for editing and working with
+// CLI commands
 
-void dance_rh_fnswap_finished(tap_dance_state_t *state, void *user_data) {
-    dance_state[DNC_RH_FNSWAP].step = dance_step(state);
-    switch (dance_state[DNC_RH_FNSWAP].step) {
-        case SINGLE_TAP:
-            register_code16(S(KC_SCLN));
-            break;
-        case SINGLE_HOLD: layer_on(FKEYS_LAYOUT); break;
-    }
-}
-
-void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[DNC_RH_FNSWAP].step) {
-        case SINGLE_TAP:
-            unregister_code16(S(KC_SCLN));
-            break;
-        case SINGLE_HOLD: layer_off(FKEYS_LAYOUT); break;
-    }
-    dance_state[DNC_RH_FNSWAP].step = 0;
-}
-
+// delete a whole word on hold
 void on_dance_backspace(tap_dance_state_t* state, void* user_data) {
     on_mod_charswap_dance(
         state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
     );
-    }
+}
 
 void dance_backspace_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
         state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
     );
-    }
+}
 
 void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
@@ -744,7 +774,7 @@ void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
     );
 }
 
-
+// bump left or right by a full word on hold
 void on_dance_la(tap_dance_state_t* state, void* user_data) {
     on_mod_charswap_dance(
         state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
@@ -781,6 +811,24 @@ void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
     );
 }
 
+/*
+* Gaming layer tap dances -- mostly for reducing keymashing errors
+*/
+
+// panic jump short circuit
+
+void on_panic_enter_mash(tap_dance_state_t* state, void* user_data) {
+    on_charswap_dance(state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+}
+
+void panic_enter_mash_finished(tap_dance_state_t* state, void* user_data) {
+    charswap_dance_finished(state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+}
+
+void panic_enter_mash_reset(tap_dance_state_t* state, void* user_data) {
+    charswap_dance_reset(state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+}
+
 
 tap_dance_action_t tap_dance_actions[] = {
         [DNC_ESC_LS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
@@ -798,4 +846,6 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
         [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
+        
+        [DNC_SADHOP] = ACTION_TAP_DANCE_FN_ADVANCED(on_panic_enter_mash, panic_enter_mash_finished, panic_enter_mash_reset),
 };
