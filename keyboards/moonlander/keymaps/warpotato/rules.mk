@@ -14,6 +14,7 @@ SRC += alttab.c
 SRC += modifiers.c
 SRC += os_swap.c
 SRC += dances.c
+SRC += dances_user.c
 
 ifeq ($(strip $(ORYX_ENABLE)), yes)
     RAW_ENABLE := yes

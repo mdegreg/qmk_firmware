@@ -1,0 +1,12 @@
+#pragma once
+
+enum {
+    OS_WIN_LAYOUT,
+    OS_MAC_LAYOUT,
+    GAMING_LAYOUT,
+    NUMKEYS_GAMING,
+    FKEYS_GAMING,
+    NUMKEYS_LAYOUT,
+    FKEYS_LAYOUT,
+    UTIL_LAYOUT
+};

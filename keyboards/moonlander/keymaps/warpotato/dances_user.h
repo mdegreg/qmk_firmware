@@ -34,3 +34,6 @@ enum tap_dance_codes {
   */ 
   MAX_COUNT_TAPDANCES,
 };
+
+extern tap_dance_action_t tap_dance_actions[];
+tap dance_state[MAX_COUNT_TAPDANCES];
