@@ -7,6 +7,7 @@ ORYX_ENABLE = no
 TAP_DANCE_ENABLE = yes
 KEY_OVERRIDE_ENABLE = no
 OS_DETECTION_ENABLE = yes
+MAGIC_ENABLE = no
 
 SRC = matrix.c
 SRC += alttab.c

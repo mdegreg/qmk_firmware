@@ -13,6 +13,7 @@
 #include "os_swap.h"
 #include "dances.h"
 #include "dances_taptypes.h"
+#include "dances_user.h"
 
 #if CONSOLE_ENABLE
 #include "print.h"
@@ -22,9 +23,15 @@
 
 enum custom_keycodes {
   RGB_SLD = SAFE_RANGE,
-  STORE_SETUPS,
-  PRINT_SETUPS,
 };
+
+uint16_t keycode_config(uint16_t keycode) {
+    return keycode;
+}
+
+uint8_t mod_config(uint8_t mod) {
+    return mod;
+}
 
 enum {
     OS_WIN_LAYOUT,
@@ -45,8 +52,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,                 KC_Q,           KC_W,           KC_E,               KC_R,           KC_T,                           KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                  KC_O,       KC_P,      KC_BSLS,        KC_PGDN,
     KC_CAPS_LOCK,           KC_A,           KC_S,           KC_D,               TD(DNC_FIND),   KC_G,                           KC_H,                           KC_MINUS,   KC_J,        KC_K,                  KC_L,       KC_SCLN,   KC_QUOTE,       KC_TRANSPARENT,
     SC_LSPO,                KC_Z,           TD(DNC_XCUT),   TD(DNC_COPY),       TD(DNC_CPS),    KC_B,                                                                       KC_N,        KC_M,                  KC_COMMA,   KC_DOT,    KC_SLASH,       SC_RSPC,
-    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TT(FKEYS_LAYOUT),                               TD(DNC_BACKSPACE),              TD(DNC_BACKSPACE),       TD(DNC_RH_FNSWAP),     KC_LBRC,    KC_RBRC,   KC_TRANSPARENT, KC_LGUI,
-                                                                                TD(DNC_SPC),    LT(NUMKEYS_LAYOUT, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
+    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TD(DNC_LH_FNSWAP),                              TD(DNC_BACKSPACE),              TD(DNC_BACKSPACE),       TD(DNC_RH_FNSWAP),     KC_LBRC,    KC_RBRC,   KC_TRANSPARENT, KC_LGUI,
+                                                                                KC_SPACE,    LT(NUMKEYS_LAYOUT, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
       // minor modifications for mac os; most are handled via generic tapdance defs,
@@ -111,8 +118,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [UTIL_LAYOUT] = LAYOUT_moonlander(
       // Quick access for momentary toggle off of base layer
     TD(DNC_BOOTLOADER),     KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_NUM_LOCK,     KC_KP_SLASH,    KC_KP_ASTERISK, KC_NO,          KC_TRANSPARENT,
-    KC_AUDIO_VOL_UP,        KC_MEDIA_PREV_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_MEDIA_NEXT_TRACK,    KC_TRANSPARENT, KC_TRANSPARENT, STORE_SETUPS,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_TRANSPARENT,
-    KC_AUDIO_VOL_DOWN,      KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, PRINT_SETUPS,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_TRANSPARENT,
+    KC_AUDIO_VOL_UP,        KC_MEDIA_PREV_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_MEDIA_NEXT_TRACK,    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_TRANSPARENT,
+    KC_AUDIO_VOL_DOWN,      KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_TRANSPARENT,
     KC_AUDIO_MUTE,          KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_KP_ENTER,    KC_TRANSPARENT,
     KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,         KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_KP_0,        KC_KP_0,        KC_KP_DOT,      KC_KP_ENTER,    KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
@@ -144,7 +151,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_ORANGE}, // 9
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_RED}, // 14
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 19
-        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 24
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE}, // 24
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 28
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, // 31
 
@@ -172,7 +179,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_ORANGE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_CHILLGREEN},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
@@ -429,19 +436,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             record->tap.interrupted,
             record->tap.count
     );
-
-    switch (keycode) {
-        case STORE_SETUPS:
-            if (record->event.pressed) {
-                store_setups_in_eeprom();
-            }
-            return false;
-        case PRINT_SETUPS:
-            if (record->event.pressed) {
-                print_stored_setups();
-            }
-            return false;
-    }
 #endif
   switch (keycode) {
     default:
@@ -454,12 +448,21 @@ void matrix_scan_user(void) { // The very important timer.
     timeout_super_alt_tab();
 }
 
+//================================
+// Tap dance configuration
+//================================
+
+tap_dance_action_t tap_dance_actions[];
+tap dance_state[MAX_COUNT_TAPDANCES];
+
 /*
 * Control tapdances
 *
 * Used to move around  between layers, trigger swaps, and other control
 * flow type things.
 */
+
+tap dance_state[MAX_COUNT_TAPDANCES];
 
 // for hopping to gaming layout
 void on_dance_0(tap_dance_state_t *state, void *user_data);
@@ -595,6 +598,30 @@ void dance_rh_fnswap_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_RH_FNSWAP].step = 0;
 }
 
+void dance_lh_fnswap_finished(tap_dance_state_t *state, void *user_data);
+void dance_lh_fnswap_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_lh_fnswap_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[DNC_LH_FNSWAP].step = dance_step(state);
+    switch (dance_state[DNC_LH_FNSWAP].step) {
+        case SINGLE_TAP:
+            register_code16(S(KC_MINUS));
+            break;
+        case SINGLE_HOLD: layer_on(FKEYS_LAYOUT); break;
+    }
+}
+
+void dance_lh_fnswap_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[DNC_LH_FNSWAP].step) {
+        case SINGLE_TAP:
+            unregister_code16(S(KC_MINUS));
+            break;
+        case SINGLE_HOLD: layer_off(FKEYS_LAYOUT); break;
+    }
+    dance_state[DNC_LH_FNSWAP].step = 0;
+}
+
 // keyboard shortcut triggers on hold
 void on_dance_2(tap_dance_state_t *state, void *user_data);
 void dance_2_finished(tap_dance_state_t *state, void *user_data);
@@ -605,11 +632,11 @@ void on_dance_2(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_2_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(state, KC_F, DNC_FIND);
+    os_modkey_dance_finished(&(dance_state[DNC_FIND]), state, KC_F, DNC_FIND);
 }
 
 void dance_2_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(state, KC_F, DNC_FIND);
+    os_modkey_dance_reset(&(dance_state[DNC_FIND]), state, KC_F, DNC_FIND);
 }
 
 void on_dance_3(tap_dance_state_t *state, void *user_data);
@@ -621,11 +648,11 @@ void on_dance_3(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_3_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(state, KC_X, DNC_XCUT);
+    os_modkey_dance_finished(&(dance_state[DNC_XCUT]), state, KC_X, DNC_XCUT);
 }
 
 void dance_3_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(state, KC_X, DNC_XCUT);
+    os_modkey_dance_reset(&(dance_state[DNC_XCUT]), state, KC_X, DNC_XCUT);
 }
 void on_dance_4(tap_dance_state_t *state, void *user_data);
 void dance_4_finished(tap_dance_state_t *state, void *user_data);
@@ -636,11 +663,11 @@ void on_dance_4(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_4_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(state, KC_C, DNC_COPY);
+    os_modkey_dance_finished(&(dance_state[DNC_COPY]), state, KC_C, DNC_COPY);
 }
 
 void dance_4_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(state, KC_C, DNC_COPY);
+    os_modkey_dance_reset(&(dance_state[DNC_COPY]), state, KC_C, DNC_COPY);
 }
 void on_dance_5(tap_dance_state_t *state, void *user_data);
 void dance_5_finished(tap_dance_state_t *state, void *user_data);
@@ -651,27 +678,11 @@ void on_dance_5(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_5_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(state, KC_V, DNC_CPS);
+    os_modkey_dance_finished(&(dance_state[DNC_CPS]), state, KC_V, DNC_CPS);
 }
 
 void dance_5_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(state, KC_V, DNC_CPS);
-}
-
-void on_dance_7(tap_dance_state_t *state, void *user_data);
-void dance_7_finished(tap_dance_state_t *state, void *user_data);
-void dance_7_reset(tap_dance_state_t *state, void *user_data);
-
-void on_dance_7(tap_dance_state_t *state, void *user_data) {
-    on_charswap_dance(state, KC_SPACE, KC_UNDS, DNC_SPC);
-}
-
-void dance_7_finished(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_finished(state, KC_SPACE, KC_UNDS, DNC_SPC);
-}
-
-void dance_7_reset(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_reset(state, KC_SPACE, KC_UNDS, DNC_SPC);
+    os_modkey_dance_reset(&(dance_state[DNC_CPS]), state, KC_V, DNC_CPS);
 }
 
 void on_dance_8(tap_dance_state_t *state, void *user_data);
@@ -716,11 +727,11 @@ void curlyswap_finished(tap_dance_state_t *state, void *user_data);
 void curlyswap_reset(tap_dance_state_t *state, void *user_data);
 
 void curlyswap_finished(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_finished(state, KC_LCBR, KC_RCBR, DNC_CURLY);
+    charswap_dance_finished(&(dance_state[DNC_CURLY]), state, KC_LCBR, KC_RCBR, DNC_CURLY);
 }
 
 void curlyswap_reset(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_reset(state, KC_LCBR, KC_RCBR, DNC_CURLY);
+    charswap_dance_reset(&(dance_state[DNC_CURLY]), state, KC_LCBR, KC_RCBR, DNC_CURLY);
 }
 
 
@@ -728,11 +739,11 @@ void squareswap_finished(tap_dance_state_t *state, void *user_data);
 void squareswap_reset(tap_dance_state_t *state, void *user_data);
 
 void squareswap_finished(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_finished(state, KC_LBRC, KC_RBRC, DNC_SQUARE);
+    charswap_dance_finished(&(dance_state[DNC_SQUARE]), state, KC_LBRC, KC_RBRC, DNC_SQUARE);
 }
 
 void squareswap_reset(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_reset(state, KC_LBRC, KC_RBRC, DNC_SQUARE);
+    charswap_dance_reset(&(dance_state[DNC_SQUARE]), state, KC_LBRC, KC_RBRC, DNC_SQUARE);
 }
 
 // reduce accidental bootloader triggers while having it more accessible
@@ -764,17 +775,17 @@ void on_dance_backspace(tap_dance_state_t* state, void* user_data) {
 
 void dance_backspace_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
-        state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+        &(dance_state[DNC_BACKSPACE]), state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
     );
 }
 
 void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
-        state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+        &(dance_state[DNC_BACKSPACE]), state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
     );
 }
 
-// bump left or right by a full word on hold
+// bump left or right by a full word on hold`
 void on_dance_la(tap_dance_state_t* state, void* user_data) {
     on_mod_charswap_dance(
         state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
@@ -783,13 +794,13 @@ void on_dance_la(tap_dance_state_t* state, void* user_data) {
 
 void dance_la_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
-        state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
     );
 }
 
 void dance_la_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
-        state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
     );
 }
 
@@ -801,13 +812,13 @@ void on_dance_ra(tap_dance_state_t* state, void* user_data) {
 
 void dance_ra_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
-        state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
     );
 }
 
 void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
-        state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
     );
 }
 
@@ -822,13 +833,12 @@ void on_panic_enter_mash(tap_dance_state_t* state, void* user_data) {
 }
 
 void panic_enter_mash_finished(tap_dance_state_t* state, void* user_data) {
-    charswap_dance_finished(state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+    charswap_dance_finished(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER, DNC_SADHOP);
 }
 
 void panic_enter_mash_reset(tap_dance_state_t* state, void* user_data) {
-    charswap_dance_reset(state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+    charswap_dance_reset(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER, DNC_SADHOP);
 }
-
 
 tap_dance_action_t tap_dance_actions[] = {
         [DNC_ESC_LS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
@@ -836,13 +846,13 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_XCUT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
         [DNC_COPY] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
         [DNC_CPS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_5, dance_5_finished, dance_5_reset),
-        [DNC_SPC] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_7, dance_7_finished, dance_7_reset),
         [DNC_SUPER_ALT_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_8, dance_8_finished, dance_8_reset),
         [DNC_RTN_L0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_layerswap_finished, dance_layerswap_reset),
         [DNC_CURLY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, curlyswap_finished, curlyswap_reset),
         [DNC_SQUARE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, squareswap_finished, squareswap_reset),
         [DNC_BOOTLOADER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_bootloader_finished, dance_bootloader_reset),
         [DNC_RH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rh_fnswap_finished, dance_rh_fnswap_reset),
+        [DNC_LH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lh_fnswap_finished, dance_lh_fnswap_reset),
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
         [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
