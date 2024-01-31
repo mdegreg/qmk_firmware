@@ -48,7 +48,7 @@ void keyboard_post_init_user(void) {
   rgb_matrix_enable();
   defer_exec(1000, os_detection_callback, NULL);
   #if CONSOLE_ENABLE
-  
+
     uprintf("OS: %2u\n",
             current_os
     );
@@ -108,8 +108,8 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (is_caps_lock_on() && (get_highest_layer(layer_state) != UTIL_LAYOUT)) {
         rgb_matrix_set_color(2, RGB_RED);
     }
-  
-    if (is_num_lock_on() && get_highest_layer(layer_state) == NUMKEYS_LAYOUT) {
+
+    if (is_num_lock_on() && (get_highest_layer(layer_state) == NUMKEYS_LAYOUT)) {
         rgb_matrix_set_color(56, RGB_RED);
     }
 
@@ -162,7 +162,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             record->tap.count
     );
 
-    
+
     switch (keycode) {
     }
 #endif
