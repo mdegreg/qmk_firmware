@@ -1,15 +1,21 @@
 # Set any rules.mk overrides for your specific keymap here.
 # See rules at https://docs.qmk.fm/#/config_options?id=the-rulesmk-file
+
+# debug defs
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
+
+# feature defs
 ORYX_ENABLE = no
 TAP_DANCE_ENABLE = yes
 KEY_OVERRIDE_ENABLE = no
 OS_DETECTION_ENABLE = yes
-MAGIC_ENABLE = no
 DEFERRED_EXEC_ENABLE = yes
-GRAVE_ESC_ENABLE = no 
+
+# firmware size optimizations
+MAGIC_ENABLE = no
+GRAVE_ESC_ENABLE = no
 
 SRC = matrix.c
 SRC += alttab.c

@@ -8,6 +8,13 @@
 #define OS_DETECTION_DEBUG_ENABLE
 #endif
 
+// base settings - no touchie
+#define RAW_USAGE_PAGE 0xFF60
+#define RAW_USAGE_ID 0x61
+#define FIRMWARE_VERSION u8"default/latest"
+#define RGB_MATRIX_STARTUP_SPD 60
+
+// customization settings
 #undef RGB_DISABLE_TIMEOUT
 #define RGB_DISABLE_TIMEOUT 600000
 
@@ -16,12 +23,14 @@
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define HOLD_ON_OTHER_KEY_PRESS
-#define RAW_USAGE_PAGE 0xFF60
-#define RAW_USAGE_ID 0x61
 #define LAYER_STATE_8BIT
-#define FIRMWARE_VERSION u8"default/latest"
 
-#define RGB_MATRIX_STARTUP_SPD 60
+// optimization stuff
+
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+#define NO_ACTION_ONESHOT
+#define NO_MUSIC_MODE
 
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
 #undef ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
