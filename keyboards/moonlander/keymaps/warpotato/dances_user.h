@@ -17,8 +17,8 @@ enum tap_dance_codes {
   DNC_BACKSPACE,
   DNC_LEFT,
   DNC_RIGHT,
-
-  DNC_SADHOP,
+  DNC_BRC,
+  DNC_PAREN,
   /*
   ** Do not change or move from bottom of enum. **
 
