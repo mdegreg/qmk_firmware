@@ -109,7 +109,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         rgb_matrix_set_color(2, RGB_RED);
     }
   
-    if (is_num_lock_on() && get_highest_layer(layer_state) == UTIL_LAYOUT){
+    if (is_num_lock_on() && get_highest_layer(layer_state) == NUMKEYS_LAYOUT) {
         rgb_matrix_set_color(56, RGB_RED);
     }
 
