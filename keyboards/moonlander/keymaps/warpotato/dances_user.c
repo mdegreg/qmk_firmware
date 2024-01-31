@@ -191,11 +191,11 @@ void on_dance_2(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_2_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(&(dance_state[DNC_FIND]), state, KC_F, DNC_FIND);
+    os_modkey_dance_finished(&(dance_state[DNC_FIND]), state, KC_F);
 }
 
 void dance_2_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(&(dance_state[DNC_FIND]), state, KC_F, DNC_FIND);
+    os_modkey_dance_reset(&(dance_state[DNC_FIND]), state, KC_F);
 }
 
 void on_dance_3(tap_dance_state_t *state, void *user_data);
@@ -207,11 +207,11 @@ void on_dance_3(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_3_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(&(dance_state[DNC_XCUT]), state, KC_X, DNC_XCUT);
+    os_modkey_dance_finished(&(dance_state[DNC_XCUT]), state, KC_X);
 }
 
 void dance_3_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(&(dance_state[DNC_XCUT]), state, KC_X, DNC_XCUT);
+    os_modkey_dance_reset(&(dance_state[DNC_XCUT]), state, KC_X);
 }
 void on_dance_4(tap_dance_state_t *state, void *user_data);
 void dance_4_finished(tap_dance_state_t *state, void *user_data);
@@ -222,11 +222,11 @@ void on_dance_4(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_4_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(&(dance_state[DNC_COPY]), state, KC_C, DNC_COPY);
+    os_modkey_dance_finished(&(dance_state[DNC_COPY]), state, KC_C);
 }
 
 void dance_4_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(&(dance_state[DNC_COPY]), state, KC_C, DNC_COPY);
+    os_modkey_dance_reset(&(dance_state[DNC_COPY]), state, KC_C);
 }
 void on_dance_5(tap_dance_state_t *state, void *user_data);
 void dance_5_finished(tap_dance_state_t *state, void *user_data);
@@ -237,11 +237,11 @@ void on_dance_5(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_5_finished(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_finished(&(dance_state[DNC_CPS]), state, KC_V, DNC_CPS);
+    os_modkey_dance_finished(&(dance_state[DNC_CPS]), state, KC_V);
 }
 
 void dance_5_reset(tap_dance_state_t *state, void *user_data) {
-    os_modkey_dance_reset(&(dance_state[DNC_CPS]), state, KC_V, DNC_CPS);
+    os_modkey_dance_reset(&(dance_state[DNC_CPS]), state, KC_V);
 }
 
 void on_dance_8(tap_dance_state_t *state, void *user_data);
@@ -286,11 +286,11 @@ void curlyswap_finished(tap_dance_state_t *state, void *user_data);
 void curlyswap_reset(tap_dance_state_t *state, void *user_data);
 
 void curlyswap_finished(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_finished(&(dance_state[DNC_CURLY]), state, KC_LCBR, KC_RCBR, DNC_CURLY);
+    charswap_dance_finished(&(dance_state[DNC_CURLY]), state, KC_LCBR, KC_RCBR);
 }
 
 void curlyswap_reset(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_reset(&(dance_state[DNC_CURLY]), state, KC_LCBR, KC_RCBR, DNC_CURLY);
+    charswap_dance_reset(&(dance_state[DNC_CURLY]), state, KC_LCBR, KC_RCBR);
 }
 
 
@@ -298,11 +298,11 @@ void squareswap_finished(tap_dance_state_t *state, void *user_data);
 void squareswap_reset(tap_dance_state_t *state, void *user_data);
 
 void squareswap_finished(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_finished(&(dance_state[DNC_SQUARE]), state, KC_LBRC, KC_RBRC, DNC_SQUARE);
+    charswap_dance_finished(&(dance_state[DNC_SQUARE]), state, KC_LBRC, KC_RBRC);
 }
 
 void squareswap_reset(tap_dance_state_t *state, void *user_data) {
-    charswap_dance_reset(&(dance_state[DNC_SQUARE]), state, KC_LBRC, KC_RBRC, DNC_SQUARE);
+    charswap_dance_reset(&(dance_state[DNC_SQUARE]), state, KC_LBRC, KC_RBRC);
 }
 
 // reduce accidental bootloader triggers while having it more accessible
@@ -328,56 +328,56 @@ void dance_bootloader_reset(tap_dance_state_t *state, void *user_data) {
 // delete a whole word on hold
 void on_dance_backspace(tap_dance_state_t* state, void* user_data) {
     on_mod_charswap_dance(
-        state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+        state, KC_BSPC, KC_BSPC, os_bksp_mod
     );
 }
 
 void dance_backspace_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
-        &(dance_state[DNC_BACKSPACE]), state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+        &(dance_state[DNC_BACKSPACE]), state, KC_BSPC, KC_BSPC, os_bksp_mod
     );
 }
 
 void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
-        &(dance_state[DNC_BACKSPACE]), state, KC_BSPC, KC_BSPC, os_bksp_mod, DNC_BACKSPACE
+        &(dance_state[DNC_BACKSPACE]), state, KC_BSPC, KC_BSPC, os_bksp_mod
     );
 }
 
 // bump left or right by a full word on hold`
 void on_dance_la(tap_dance_state_t* state, void* user_data) {
     on_mod_charswap_dance(
-        state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+        state, KC_LEFT, KC_LEFT, os_bksp_mod
     );
 }
 
 void dance_la_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
-        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod
     );
 }
 
 void dance_la_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
-        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod, DNC_LEFT
+        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod
     );
 }
 
 void on_dance_ra(tap_dance_state_t* state, void* user_data) {
     on_mod_charswap_dance(
-        state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+        state, KC_RIGHT, KC_RIGHT, os_bksp_mod
     );
 }
 
 void dance_ra_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
-        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod
     );
 }
 
 void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_reset(
-        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod, DNC_RIGHT
+        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod
     );
 }
 
@@ -388,15 +388,31 @@ void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
 // panic jump short circuit
 
 void on_panic_enter_mash(tap_dance_state_t* state, void* user_data) {
-    on_charswap_dance(state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+    on_charswap_dance(state, KC_SPACE, KC_ENTER);
 }
 
 void panic_enter_mash_finished(tap_dance_state_t* state, void* user_data) {
-    charswap_dance_finished(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+    charswap_dance_finished(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER);
 }
 
 void panic_enter_mash_reset(tap_dance_state_t* state, void* user_data) {
-    charswap_dance_reset(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER, DNC_SADHOP);
+    charswap_dance_reset(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER);
+}
+
+void on_dance_space(tap_dance_state_t *state, void *user_data);
+void dance_space_finished(tap_dance_state_t *state, void *user_data);
+void dance_space_reset(tap_dance_state_t *state, void *user_data);
+
+void on_dance_space(tap_dance_state_t *state, void *user_data) {
+    on_charswap_dance(state, KC_SPACE, KC_UNDS);
+}
+
+void dance_space_finished(tap_dance_state_t *state, void *user_data) {
+    charswap_dance_finished(&(dance_state[DNC_SPACE]), state, KC_SPACE, KC_UNDS);
+}
+
+void dance_space_reset(tap_dance_state_t *state, void *user_data) {
+    charswap_dance_reset(&(dance_state[DNC_SPACE]), state, KC_SPACE, KC_UNDS);
 }
 
 tap_dance_action_t tap_dance_actions[] = {
@@ -410,6 +426,7 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_CURLY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, curlyswap_finished, curlyswap_reset),
         [DNC_SQUARE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, squareswap_finished, squareswap_reset),
         [DNC_BOOTLOADER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_bootloader_finished, dance_bootloader_reset),
+        [DNC_SPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_space, dance_space_finished, dance_space_reset),
         [DNC_RH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rh_fnswap_finished, dance_rh_fnswap_reset),
         [DNC_LH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lh_fnswap_finished, dance_lh_fnswap_reset),
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),

@@ -65,6 +65,11 @@ void make_guess(void) {
         detected_os = OS_MACOS;
         return;
     }
+    // My mac responds thusly: 
+    if (setups_data.count == 6 && setups_data.last_wlength == 0xFF && setups_data.cnt_ff == 2 && setups_data.cnt_02 == 2) {
+        detected_os = OS_MACOS;
+        return;
+    }
     if (setups_data.count == 4 && setups_data.cnt_ff == 0 && setups_data.cnt_02 == 2) {
         // iOS and iPadOS don't have the last 0xFF packet.
         detected_os = OS_IOS;

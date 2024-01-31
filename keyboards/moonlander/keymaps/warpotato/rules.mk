@@ -8,6 +8,8 @@ TAP_DANCE_ENABLE = yes
 KEY_OVERRIDE_ENABLE = no
 OS_DETECTION_ENABLE = yes
 MAGIC_ENABLE = no
+DEFERRED_EXEC_ENABLE = yes
+GRAVE_ESC_ENABLE = no 
 
 SRC = matrix.c
 SRC += alttab.c
@@ -15,6 +17,7 @@ SRC += modifiers.c
 SRC += os_swap.c
 SRC += dances.c
 SRC += dances_user.c
+SRC += callbacks.c
 
 ifeq ($(strip $(ORYX_ENABLE)), yes)
     RAW_ENABLE := yes

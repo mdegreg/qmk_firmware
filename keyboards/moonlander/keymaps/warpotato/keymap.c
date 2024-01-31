@@ -17,16 +17,14 @@
 #include "layers_user.h"
 #include "ledmap_user.h"
 #include "layout_user.h"
+#include "callbacks.h"
+#include "custom_keycodes.h"
 
 #if CONSOLE_ENABLE
 #include "print.h"
 #endif
 
 #define getarraylength(x) (sizeof(x) / sizeof((x)[0]))
-
-enum custom_keycodes {
-  RGB_SLD = SAFE_RANGE,
-};
 
 uint16_t keycode_config(uint16_t keycode) {
     return keycode;
@@ -43,13 +41,18 @@ void keyboard_post_init_user(void) {
   #if CONSOLE_ENABLE
   debug_enable=true;
   debug_keyboard=true;
-  //debug_mouse=true;
+    #if MOUSEKEY_ENABLE
+    debug_mouse=true;
+    #endif
   #endif
   rgb_matrix_enable();
-  os_variant_t current_os = detected_host_os();
-  if (current_os == OS_MACOS) {
-    layer_on(OS_MAC_LAYOUT);
-  }
+  defer_exec(1000, os_detection_callback, NULL);
+  #if CONSOLE_ENABLE
+  
+    uprintf("OS: %2u\n",
+            current_os
+    );
+  #endif
 }
 
 void set_layer_color(int layer) {
@@ -158,8 +161,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             record->tap.interrupted,
             record->tap.count
     );
+
+    
+    switch (keycode) {
+    }
 #endif
   switch (keycode) {
+#if CONSOLE_ENABLE
+    case KC_EQUAL:
+        if (record->event.pressed) {
+            store_setups_in_eeprom();
+        }
+        return false;
+    case KC_U:
+        if (record->event.pressed) {
+            print_stored_setups();
+        }
+        return false;
+#endif
     default:
       return true;
   }

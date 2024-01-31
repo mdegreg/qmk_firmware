@@ -11,6 +11,7 @@ enum tap_dance_codes {
   DNC_CURLY,
   DNC_SQUARE,
   DNC_BOOTLOADER,
+  DNC_SPACE,
   DNC_RH_FNSWAP,
   DNC_LH_FNSWAP,
   DNC_BACKSPACE,
