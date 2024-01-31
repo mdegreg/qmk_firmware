@@ -419,24 +419,6 @@ void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
     );
 }
 
-/*
-* Gaming layer tap dances -- mostly for reducing keymashing errors
-*/
-
-// panic jump short circuit
-
-void on_panic_enter_mash(tap_dance_state_t* state, void* user_data) {
-    on_charswap_dance(state, KC_SPACE, KC_ENTER);
-}
-
-void panic_enter_mash_finished(tap_dance_state_t* state, void* user_data) {
-    charswap_dance_finished(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER);
-}
-
-void panic_enter_mash_reset(tap_dance_state_t* state, void* user_data) {
-    charswap_dance_reset(&(dance_state[DNC_SADHOP]), state, KC_SPACE, KC_ENTER);
-}
-
 void on_dance_space(tap_dance_state_t *state, void *user_data);
 void dance_space_finished(tap_dance_state_t *state, void *user_data);
 void dance_space_reset(tap_dance_state_t *state, void *user_data);
@@ -470,6 +452,4 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
         [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
-        
-        [DNC_SADHOP] = ACTION_TAP_DANCE_FN_ADVANCED(on_panic_enter_mash, panic_enter_mash_finished, panic_enter_mash_reset),
 };
