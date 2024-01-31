@@ -164,7 +164,7 @@ void mod_charswap_dance_finished(tap *tap_state, tap_dance_state_t* state, uint1
     tap_state->step = dance_step(state);
     switch (tap_state->step) {
         case SINGLE_TAP: register_code16(base_code); break;
-        case SINGLE_HOLD: tap_code16(alt_mod | alt_code); break;
+        case SINGLE_HOLD: register_code16(alt_mod | alt_code); break;
         case DOUBLE_TAP:
         case DOUBLE_SINGLE_TAP: tap_code16(base_code); register_code16(base_code);
     }
@@ -174,7 +174,7 @@ void mod_charswap_dance_reset(tap *tap_state, tap_dance_state_t* state, uint16_t
     wait_ms(10);
     switch (tap_state->step) {
         case SINGLE_TAP: unregister_code16(base_code); break;
-        case SINGLE_HOLD: break;
+        case SINGLE_HOLD: unregister_code16(alt_mod | alt_code); break;
         case DOUBLE_TAP:
         case DOUBLE_SINGLE_TAP: unregister_code16(base_code);
     }
