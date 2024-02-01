@@ -23,7 +23,7 @@
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define HOLD_ON_OTHER_KEY_PRESS
-#define LAYER_STATE_8BIT
+#define LAYER_STATE_16BIT
 
 // optimization stuff
 

@@ -29,11 +29,6 @@ void dance_0_finished(tap_dance_state_t *state, void *user_data);
 void dance_0_reset(tap_dance_state_t *state, void *user_data);
 
 void on_dance_0(tap_dance_state_t *state, void *user_data) {
-    if(state->count == 3) {
-        tap_code16(KC_ESCAPE);
-        tap_code16(KC_ESCAPE);
-        tap_code16(KC_ESCAPE);
-    }
     if(state->count > 3) {
         tap_code16(KC_ESCAPE);
     }
@@ -46,16 +41,30 @@ void dance_0_finished(tap_dance_state_t *state, void *user_data) {
         case DOUBLE_HOLD:
             layer_on(GAMING_LAYOUT);
             break;
-        case DOUBLE_SINGLE_TAP: tap_code16(KC_ESCAPE); register_code16(KC_ESCAPE);
+        case DOUBLE_SINGLE_TAP:
+            tap_code16(KC_ESCAPE);
+            register_code16(KC_ESCAPE);
+            break;
+        case TRIPLE_HOLD:
+            layer_on(GAMING_LAYOUT);
+            layer_on(GAMINGFAST_LAYOUT);
+            break;
+        case TRIPLE_SINGLE_TAP:
+            tap_code16(KC_ESCAPE);
+            tap_code16(KC_ESCAPE);
+            register_code16(KC_ESCAPE);
     }
 }
 
 void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[DNC_ESC_LS].step) {
-        case SINGLE_TAP: unregister_code16(KC_ESCAPE); break;
-        case DOUBLE_TAP: unregister_code16(KC_ESCAPE); break;
-        case DOUBLE_SINGLE_TAP: unregister_code16(KC_ESCAPE); break;
+        case SINGLE_TAP: 
+        case DOUBLE_TAP: 
+        case DOUBLE_SINGLE_TAP:
+        case TRIPLE_SINGLE_TAP:
+            unregister_code16(KC_ESCAPE);
+            break;
     }
     dance_state[DNC_ESC_LS].step = 0;
 }
@@ -120,6 +129,29 @@ void dance_layerswap_reset(tap_dance_state_t *state, void *user_data) {
             break;
     }
     dance_state[DNC_RTN_L0].step = 0;
+}
+
+void dance_gameswap_finished(tap_dance_state_t *state, void *user_data);
+void dance_gameswap_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_gameswap_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[DNC_GMODESWAP].step = dance_step(state);
+
+    switch (dance_state[DNC_GMODESWAP].step) {
+        case DOUBLE_TAP:
+            layer_invert(GAMINGFAST_LAYOUT);
+    }
+}
+
+
+void dance_gameswap_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[GAMINGFAST_LAYOUT].step) {
+        case DOUBLE_TAP:
+            // noop
+            break;
+    }
+    dance_state[DNC_GMODESWAP].step = 0;
 }
 
 /*
@@ -486,4 +518,5 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
         [DNC_BRC] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_brc, dance_brc_finished, dance_brc_reset),
         [DNC_PAREN] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_paren, dance_paren_finished, dance_paren_reset),
+        [DNC_GMODESWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_gameswap_finished, dance_gameswap_reset),
 };

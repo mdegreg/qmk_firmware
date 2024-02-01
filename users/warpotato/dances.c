@@ -15,12 +15,10 @@ uint8_t dance_step(tap_dance_state_t *state) {
         if (state->interrupted) return DOUBLE_SINGLE_TAP;
         else if (state->pressed) return DOUBLE_HOLD;
         else return DOUBLE_TAP;
-    # if CONSOLE_ENABLE
     } else if (state->count == 3) {
         if (state->interrupted) return TRIPLE_SINGLE_TAP;
         else if (state->pressed) return TRIPLE_HOLD;
         else return TRIPLE_TAP;
-    # endif
     }
     return MORE_TAPS;
 }

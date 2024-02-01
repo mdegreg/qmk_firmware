@@ -19,6 +19,7 @@ enum tap_dance_codes {
   DNC_RIGHT,
   DNC_BRC,
   DNC_PAREN,
+  DNC_GMODESWAP,
   /*
   ** Do not change or move from bottom of enum. **
 
