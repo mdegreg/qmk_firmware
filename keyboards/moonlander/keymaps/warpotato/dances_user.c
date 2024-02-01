@@ -92,7 +92,7 @@ void dance_layerswap_finished(tap_dance_state_t *state, void *user_data) {
         case SINGLE_HOLD:
             layer_on(UTIL_LAYOUT);
             break;
-        case DOUBLE_TAP:
+        case DOUBLE_HOLD:
             current_layer = get_highest_layer(layer_state);
             if (current_layer == OS_WIN_LAYOUT) {
                 layer_on(OS_MAC_LAYOUT);
@@ -124,7 +124,7 @@ void dance_layerswap_reset(tap_dance_state_t *state, void *user_data) {
         case SINGLE_HOLD:
             layer_off(UTIL_LAYOUT);
             break;
-        case DOUBLE_TAP:
+        case DOUBLE_HOLD:
             // noop
             break;
     }
@@ -138,7 +138,7 @@ void dance_gameswap_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_GMODESWAP].step = dance_step(state);
 
     switch (dance_state[DNC_GMODESWAP].step) {
-        case DOUBLE_TAP:
+        case DOUBLE_HOLD:
             layer_invert(GAMINGFAST_LAYOUT);
     }
 }
@@ -147,7 +147,7 @@ void dance_gameswap_finished(tap_dance_state_t *state, void *user_data) {
 void dance_gameswap_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[GAMINGFAST_LAYOUT].step) {
-        case DOUBLE_TAP:
+        case DOUBLE_HOLD:
             // noop
             break;
     }
