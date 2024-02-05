@@ -1,5 +1,6 @@
 #define LAYER_STATE_8BIT
 
+// optimization stuff
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 #define NO_ACTION_ONESHOT
