@@ -20,6 +20,9 @@
 // OLED animation
 #include "./lib/layer_status/layer_status.h"
 
+#include "os_swap.h"
+#include "dances.h"
+
 #define getarraylength(x) (sizeof(x) / sizeof((x)[0]))
 
 // noop functions for space optimization
@@ -29,6 +32,37 @@ uint16_t keycode_config(uint16_t keycode) {
 
 uint8_t mod_config(uint8_t mod) {
     return mod;
+}
+
+
+uint32_t os_detection_callback(uint32_t trigger_time, void* cb_arg) {
+  os_variant_t current_os = detected_host_os();
+  if (current_os == OS_MACOS) {
+    set_os(OS_MACOS);
+  } else {
+    set_os(OS_WINDOWS);
+  }
+  return 0;
+}
+
+
+void keyboard_post_init_user(void) {
+  // Customise these values to desired behaviour
+  #if CONSOLE_ENABLE
+  debug_enable=true;
+  debug_keyboard=true;
+    #if MOUSEKEY_ENABLE
+    debug_mouse=true;
+    #endif
+  #endif
+  rgb_matrix_enable();
+  defer_exec(1000, os_detection_callback, NULL);
+  #if CONSOLE_ENABLE
+
+    uprintf("OS: %2u\n",
+            current_os
+    );
+  #endif
 }
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
@@ -43,6 +77,29 @@ enum layer_names {
     _FN2
 };
 
+enum tap_dance_codes {
+  DNC_LEFT,
+  DNC_RIGHT,
+  /*
+  ** Do not change or move from bottom of enum. **
+
+  An enum by default has the value 0 for the 
+  first value, incrementing by 1 each time.
+  
+  Leaving this as is will take advantage of that,
+  as the last item will be equal to the length of
+  the array of items above, e.g. the bottom value
+  will be the number of items excluding itself.
+
+  We use the last item here to indicate dynamically
+  how many tap dance functions we support within this keymap.
+  */ 
+  MAX_COUNT_TAPDANCES,
+};
+
+tap_dance_action_t tap_dance_actions[];
+tap dance_state[MAX_COUNT_TAPDANCES];
+
 // enum layer_keycodes { };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -55,7 +112,7 @@ Push rollers start at top left
                 KC_7,     KC_8,    KC_9,    KC_KP_MINUS,     KC_MUTE,
                 KC_4,     KC_5,    KC_6,    KC_KP_PLUS,      TO(_FN),
                 KC_1,     KC_2,    KC_3,    KC_ENT,          _______,
-                KC_0,     KC_DOT,  KC_LALT,   KC_LSFT
+                KC_0,     KC_DOT,  KC_BSPC,   KC_LSFT
             ),
 
 /*
@@ -76,8 +133,8 @@ Push rollers start at top left
     [_FN1] = LAYOUT(
                 _______, _______, _______, _______, _______,
                 _______, _______, _______, _______, TO(_FN2),
-                _______, _______, _______, _______, _______,
-                _______, _______, _______, _______
+                _______, KC_UP,   C(KC_C), KC_ENT, _______,
+                TD(DNC_LEFT), KC_DOWN, TD(DNC_RIGHT), _______
             ),
 
 /*
@@ -106,7 +163,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE},
         {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE},
         {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_CHILLGREEN},
-        {HSV_WHITE}, {HSV_LIGHTBLUE}, {HSV_ORANGE}, {HSV_MAGENTA}
+        {HSV_WHITE}, {HSV_LIGHTBLUE}, {HSV_RED}, {HSV_MAGENTA}
     },
     [_FN] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
@@ -117,8 +174,8 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [_FN1] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}
+        {HSV_OFF}, {HSV_MINTGREEN}, {HSV_RED}, {HSV_CHILLGREEN},
+        {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_OFF}
     },
     [_FN2] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_RED},
@@ -165,3 +222,45 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_FN2]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
 #endif
+
+// bump left or right by a full word on hold`
+void on_dance_la(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_LEFT, KC_LEFT, os_bksp_mod
+    );
+}
+
+void dance_la_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod
+    );
+}
+
+void dance_la_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        &(dance_state[DNC_LEFT]), state, KC_LEFT, KC_LEFT, os_bksp_mod
+    );
+}
+
+void on_dance_ra(tap_dance_state_t* state, void* user_data) {
+    on_mod_charswap_dance(
+        state, KC_RIGHT, KC_RIGHT, os_bksp_mod
+    );
+}
+
+void dance_ra_finished(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_finished(
+        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod
+    );
+}
+
+void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
+    mod_charswap_dance_reset(
+        &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod
+    );
+}
+
+tap_dance_action_t tap_dance_actions[] = {
+        [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
+        [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
+};

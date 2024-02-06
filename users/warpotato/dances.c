@@ -28,14 +28,14 @@ Note that modkey and charswap dances fire their hold action once, rather than ho
 when the key is held. This precludes using keys bound to this dance type
 from spamming their hold action value.
 */
-
+#ifdef OS_SWAP_CMD_KEY_ENABLE
 void os_modkey_on_dance(tap_dance_state_t *state, uint16_t code) {
     if(state->count == 3) {
         tap_code16(code);
         tap_code16(code);
         tap_code16(code);
 
-#if CONSOLE_ENABLE
+#ifdef CONSOLE_ENABLE
     uprintf("Fired triple tap: %u\n", code);
 #endif
     }
@@ -43,14 +43,14 @@ void os_modkey_on_dance(tap_dance_state_t *state, uint16_t code) {
         tap_code16(code);
     }
 
-#if CONSOLE_ENABLE
+#ifdef CONSOLE_ENABLE
     uprintf("Fired longhold tap: %u\n", code);
 #endif
 }
 
 void os_modkey_dance_finished(tap *tap_state, tap_dance_state_t *state, uint16_t code) {
 
-    #if CONSOLE_ENABLE
+    #ifdef CONSOLE_ENABLE
     uprintf("Received code: %u\n", code);
     #endif
     tap_state->step = dance_step(state);
@@ -72,7 +72,7 @@ void os_modkey_dance_finished(tap *tap_state, tap_dance_state_t *state, uint16_t
             uprintf("Fired DOUBLE_TAP: %u\n", os_make_command_letter_code(code));
             #endif
         case DOUBLE_SINGLE_TAP:
-#if CONSOLE_ENABLE
+#ifdef CONSOLE_ENABLE
             uprintf("Fired DOUBLE_SINGLE_TAP: %u\n", code);
 #endif
             tap_code16(code);
@@ -82,7 +82,7 @@ void os_modkey_dance_finished(tap *tap_state, tap_dance_state_t *state, uint16_t
 
 void os_modkey_dance_reset(tap *tap_state, tap_dance_state_t *state, uint16_t code) {
     wait_ms(10);
-    #if CONSOLE_ENABLE
+    #ifdef CONSOLE_ENABLE
     uprintf("Received code: %u\n", code);
     #endif
     switch (tap_state->step) {
@@ -109,6 +109,7 @@ void os_modkey_dance_reset(tap *tap_state, tap_dance_state_t *state, uint16_t co
     }
     tap_state->step = 0;
 }
+#endif
 
 void on_charswap_dance(tap_dance_state_t* state, uint16_t base_code, uint16_t alt_code) {
     if(state->count == 3) {

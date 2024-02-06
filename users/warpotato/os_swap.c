@@ -3,12 +3,11 @@
 #include QMK_KEYBOARD_H
 #endif
 
-#ifndef SUPER_ALT_TAB_INITIALIZED
-#define SUPER_ALT_TAB_INITIALIZED
+#ifdef SUPER_ALT_TAB_ENABLE
 #include "alttab.h"
 #endif
 
-#if CONSOLE_ENABLE
+#ifdef CONSOLE_ENABLE
 #include "print.h"
 #endif
 
@@ -41,9 +40,13 @@ void set_os(int os){
             os_bksp_mod = QK_LALT;
             break;
     }
+    
+#ifdef SUPER_ALT_TAB_ENABLE
     set_super_alt_tab_init_key(os_alt_tab_key);
+#endif
 }
 
+#ifdef OS_SWAP_CMD_KEY_ENABLE
 uint16_t os_make_command_letter_code(uint16_t code){
     uint16_t return_code;
     if (active_os == OS_WINDOWS){
@@ -51,8 +54,9 @@ uint16_t os_make_command_letter_code(uint16_t code){
     } else {
         return_code = LGUI(code);
     }
-#if CONSOLE_ENABLE
+#ifdef CONSOLE_ENABLE
     uprintf("OS: %d | code 0x%04X\n", active_os, return_code);
 #endif
     return return_code;
 }
+#endif
