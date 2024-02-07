@@ -1,3 +1,5 @@
+
+// User feature configs
 #define LAYER_STATE_8BIT
 
 // optimization stuff

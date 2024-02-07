@@ -63,6 +63,9 @@ void keyboard_post_init_user(void) {
             current_os
     );
   #endif
+
+#ifdef OLED_ENABLE
+#endif
 }
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
@@ -88,9 +91,9 @@ enum tap_dance_codes {
   /*
   ** Do not change or move from bottom of enum. **
 
-  An enum by default has the value 0 for the 
+  An enum by default has the value 0 for the
   first value, incrementing by 1 each time.
-  
+
   Leaving this as is will take advantage of that,
   as the last item will be equal to the length of
   the array of items above, e.g. the bottom value
@@ -98,7 +101,7 @@ enum tap_dance_codes {
 
   We use the last item here to indicate dynamically
   how many tap dance functions we support within this keymap.
-  */ 
+  */
   MAX_COUNT_TAPDANCES,
 };
 
@@ -159,10 +162,18 @@ Push rollers start at top left
             ),
 };
 
+const char * layer_names[] = {
+    "Base",
+    "Fn",
+    "Arrow",
+    "Util",
+};
+
 #ifdef OLED_ENABLE
     bool oled_task_user(void) {
-        render_layer_status();
-
+        uint8_t current_layer = get_highest_layer(layer_state);
+        oled_set_cursor(2, 1);
+        oled_write_ln(PSTR(layer_names[current_layer]), false);
         return true;
     }
 #endif
@@ -194,7 +205,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_CYCLE_LAYERS_R:
       // Our logic will happen on presses, nothing is done on releases
-      if (!record->event.pressed) { 
+      if (!record->event.pressed) {
         // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
         return false;
       }
@@ -202,7 +213,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case KC_CYCLE_LAYERS_L:
       // Our logic will happen on presses, nothing is done on releases
-      if (!record->event.pressed) { 
+      if (!record->event.pressed) {
         // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
         return false;
       }
