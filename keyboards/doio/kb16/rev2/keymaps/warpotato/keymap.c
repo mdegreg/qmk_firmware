@@ -74,8 +74,13 @@ enum layer_names {
     _BASE,
     _FN,
     _FN1,
-    _FN2
+    _FN2,
+    NUM_LAYERS,
 };
+// 1st layer on the cycle
+#define LAYER_CYCLE_START _BASE
+// Last layer on the cycle
+#define LAYER_CYCLE_END NUM_LAYERS - 1
 
 enum tap_dance_codes {
   DNC_LEFT,
@@ -95,6 +100,11 @@ enum tap_dance_codes {
   how many tap dance functions we support within this keymap.
   */ 
   MAX_COUNT_TAPDANCES,
+};
+
+enum keycodes {
+    KC_CYCLE_LAYERS_R = SAFE_RANGE,
+    KC_CYCLE_LAYERS_L,
 };
 
 tap_dance_action_t tap_dance_actions[];
@@ -158,6 +168,54 @@ Push rollers start at top left
 #endif
 
 
+void on_cw_spin(void);
+void on_ccw_spin(void);
+
+void on_cw_spin(void) {
+      uint8_t current_layer = get_highest_layer(layer_state);
+      int8_t next_layer = current_layer + 1;
+      if (next_layer > LAYER_CYCLE_END) {
+          next_layer = LAYER_CYCLE_START;
+      }
+      layer_move(next_layer);
+}
+
+void on_ccw_spin(void) {
+      uint8_t current_layer = get_highest_layer(layer_state);
+      int8_t next_layer = current_layer - 1;
+      if (next_layer < LAYER_CYCLE_START) {
+          next_layer = LAYER_CYCLE_END;
+      }
+      layer_move(next_layer);
+}
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_CYCLE_LAYERS_R:
+      // Our logic will happen on presses, nothing is done on releases
+      if (!record->event.pressed) { 
+        // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
+        return false;
+      }
+      on_cw_spin();
+      return false;
+    case KC_CYCLE_LAYERS_L:
+      // Our logic will happen on presses, nothing is done on releases
+      if (!record->event.pressed) { 
+        // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
+        return false;
+      }
+      on_ccw_spin();
+      return false;
+
+    // Process other keycodes normally
+    default:
+      return true;
+  }
+}
+
+
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [_BASE] = {
         {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE},
@@ -216,7 +274,7 @@ bool rgb_matrix_indicators_user(void) {
 
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_BASE] = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
+    [_BASE] = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_CYCLE_LAYERS_L, KC_CYCLE_LAYERS_R), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
     [_FN]   = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN1]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN2]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
