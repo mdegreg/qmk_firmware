@@ -78,6 +78,7 @@ enum layer_names {
     SONAR,
     _ARROW,
     PYCHARM,
+    VSCODE,
     _FN,
     _FN2,
     NUM_LAYERS,
@@ -110,6 +111,9 @@ enum tap_dance_codes {
 enum keycodes {
     KC_CYCLE_LAYERS_R = SAFE_RANGE,
     KC_CYCLE_LAYERS_L,
+    VSC_PUSH,
+    VSC_COMMIT,
+    VSC_PULL,
 };
 
 tap_dance_action_t tap_dance_actions[];
@@ -155,6 +159,14 @@ Push rollers start at top left
                 C(S(KC_DOWN)), _______, _______, LGUI(KC_T)
             ),
 
+    /*  Row:    0        1        2        3        4        */
+    [VSCODE] = LAYOUT(
+                _______, _______, _______, _______, _______,
+                _______, _______, _______, VSC_PUSH, _______,
+                _______, _______, _______, VSC_COMMIT, _______,
+                _______, _______, _______, VSC_PULL
+            ),
+
     /*  Row:    0        1        2        3        4       */
     [_FN] = LAYOUT(
                 _______, _______, _______, _______,   _______,
@@ -177,6 +189,7 @@ const char * layer_names[] = {
     "Sonar",
     "Arrow",
     "Pycharm",
+    "VSCode",
     "Fn",
     "Util",
 };
@@ -224,12 +237,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       on_cw_spin();
       return false;
     case KC_CYCLE_LAYERS_L:
-      // Our logic will happen on presses, nothing is done on releases
       if (!record->event.pressed) {
-        // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
         return false;
       }
       on_ccw_spin();
+      return false;
+    case VSC_PUSH:
+      if (!record->event.pressed) {
+        return false;
+      }
+      SEND_STRING(SS_LALT("gp"));
+      return false;
+    case VSC_COMMIT:
+      if (!record->event.pressed) {
+        return false;
+      }
+      SEND_STRING(SS_LALT("gc"));
+      return false;
+    case VSC_PULL:
+      if (!record->event.pressed) {
+        return false;
+      }
+      SEND_STRING(SS_LALT("gu"));
       return false;
 
     // Process other keycodes normally
@@ -263,6 +292,12 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_RED}, {HSV_OFF}, {HSV_OFF}, {HSV_CHILLGREEN},
         {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_CHILLGREEN},
         {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_LIGHTBLUE}
+    },
+    [VSCODE] = {
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_CHILLGREEN},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_CHILLGREEN},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_PURPLE}
     },
     [_FN] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
@@ -313,6 +348,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [SONAR]   = { ENCODER_CCW_CW(S(KC_F9), S(KC_F10)), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_ARROW]   = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [PYCHARM]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [VSCODE]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN2]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
