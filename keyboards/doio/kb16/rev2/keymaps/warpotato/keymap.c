@@ -75,6 +75,7 @@ void keyboard_post_init_user(void) {
 
 enum layer_names {
     _BASE,
+    SONAR,
     _ARROW,
     PYCHARM,
     _FN,
@@ -132,8 +133,15 @@ Push rollers start at top left
 
 */
     /*  Row:    0        1        2        3        4       */
+    [SONAR] = LAYOUT(
+                C(KC_KP_DOT), C(KC_KP_MINUS), C(KC_KP_PLUS), _______, S(KC_F8),
+                C(KC_KP_3), C(KC_KP_9), C(KC_KP_6), _______, _______,
+                C(KC_KP_2), C(KC_KP_8), C(KC_KP_5), _______, _______,
+                C(KC_KP_1), C(KC_KP_7), C(KC_KP_4), _______
+            ),
+    /*  Row:    0        1        2        3        4       */
     [_ARROW] = LAYOUT(
-                _______, _______, _______, _______, _______,
+                _______, _______, _______, _______, KC_MUTE,
                 _______, _______, _______, _______, _______,
                 _______, KC_UP,   C(KC_C), KC_ENT, _______,
                 TD(DNC_LEFT), KC_DOWN, TD(DNC_RIGHT), _______
@@ -166,6 +174,7 @@ Push rollers start at top left
 
 const char * layer_names[] = {
     "Base",
+    "Sonar",
     "Arrow",
     "Pycharm",
     "Fn",
@@ -237,6 +246,12 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_CHILLGREEN},
         {HSV_WHITE}, {HSV_LIGHTBLUE}, {HSV_RED}, {HSV_MAGENTA}
     },
+    [SONAR] = {
+        {HSV_MINTGREEN}, {HSV_RED}, {HSV_CHILLGREEN}, {HSV_OFF},
+        {HSV_LIGHTBLUE}, {HSV_RED}, {HSV_CHILLGREEN}, {HSV_OFF},
+        {HSV_MAGENTA}, {HSV_RED}, {HSV_CHILLGREEN}, {HSV_OFF},
+        {HSV_PURPLE}, {HSV_RED}, {HSV_CHILLGREEN}, {HSV_OFF}
+    },
     [_ARROW] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
@@ -295,7 +310,8 @@ bool rgb_matrix_indicators_user(void) {
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_BASE] = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_CYCLE_LAYERS_L, KC_CYCLE_LAYERS_R), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
-    [_ARROW]   = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [SONAR]   = { ENCODER_CCW_CW(S(KC_F9), S(KC_F10)), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [_ARROW]   = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [PYCHARM]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN2]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
