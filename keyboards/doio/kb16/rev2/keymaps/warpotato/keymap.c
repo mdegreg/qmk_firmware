@@ -75,8 +75,9 @@ void keyboard_post_init_user(void) {
 
 enum layer_names {
     _BASE,
+    _ARROW,
+    PYCHARM,
     _FN,
-    _FN1,
     _FN2,
     NUM_LAYERS,
 };
@@ -123,40 +124,41 @@ Push rollers start at top left
     /*  Row:    0         1        2        3         4      */
     [_BASE] = LAYOUT(
                 KC_7,     KC_8,    KC_9,    KC_KP_MINUS,     KC_MUTE,
-                KC_4,     KC_5,    KC_6,    KC_KP_PLUS,      TO(_FN),
+                KC_4,     KC_5,    KC_6,    KC_KP_PLUS,      _______,
                 KC_1,     KC_2,    KC_3,    KC_ENT,          _______,
                 KC_0,     KC_DOT,  KC_BSPC,   KC_LSFT
             ),
-
 /*
 
 */
     /*  Row:    0        1        2        3        4       */
-    [_FN] = LAYOUT(
-                _______, _______, _______, _______,   _______,
-                KC_F1,   KC_F2,   KC_F3,   KC_F4,     TO(_FN1),
-                KC_F5,   KC_F6,   KC_F7,   KC_F8,     _______,
-                KC_F9,   KC_F10,  KC_F11,  KC_F12
-            ),
-
-/*
-
-*/
-    /*  Row:    0        1        2        3        4       */
-    [_FN1] = LAYOUT(
+    [_ARROW] = LAYOUT(
                 _______, _______, _______, _______, _______,
-                _______, _______, _______, _______, TO(_FN2),
+                _______, _______, _______, _______, _______,
                 _______, KC_UP,   C(KC_C), KC_ENT, _______,
                 TD(DNC_LEFT), KC_DOWN, TD(DNC_RIGHT), _______
             ),
 
-/*
+    /*  Row:    0        1        2        3        4        */
+    [PYCHARM] = LAYOUT(
+                KC_F1, LGUI(KC_B), _______, LCTL(KC_T), _______,
+                LSG(KC_BSPC), _______, _______, LSG(KC_K), _______,
+                C(S(KC_UP)), _______, _______, LGUI(KC_K), _______,
+                C(S(KC_DOWN)), _______, _______, LGUI(KC_T)
+            ),
 
-*/
+    /*  Row:    0        1        2        3        4       */
+    [_FN] = LAYOUT(
+                _______, _______, _______, _______,   _______,
+                KC_F1,   KC_F2,   KC_F3,   KC_F4,     _______,
+                KC_F5,   KC_F6,   KC_F7,   KC_F8,     _______,
+                KC_F9,   KC_F10,  KC_F11,  KC_F12
+            ),
+
     /*  Row:    0        1        2        3        4        */
     [_FN2] = LAYOUT(
                 _______, _______, _______, QK_BOOT, _______,
-                _______, _______, _______, _______, TO(_BASE),
+                _______, _______, _______, _______, _______,
                 _______, _______, _______, _______, _______,
                 _______, _______, _______, _______
             ),
@@ -164,8 +166,9 @@ Push rollers start at top left
 
 const char * layer_names[] = {
     "Base",
-    "Fn",
     "Arrow",
+    "Pycharm",
+    "Fn",
     "Util",
 };
 
@@ -234,17 +237,23 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_CHILLGREEN},
         {HSV_WHITE}, {HSV_LIGHTBLUE}, {HSV_RED}, {HSV_MAGENTA}
     },
+    [_ARROW] = {
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_MINTGREEN}, {HSV_RED}, {HSV_CHILLGREEN},
+        {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_OFF}
+    },
+    [PYCHARM] = {
+        {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_OFF}, {HSV_ORANGE},
+        {HSV_RED}, {HSV_OFF}, {HSV_OFF}, {HSV_CHILLGREEN},
+        {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_CHILLGREEN},
+        {HSV_LIGHTBLUE}, {HSV_OFF}, {HSV_OFF}, {HSV_LIGHTBLUE}
+    },
     [_FN] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_CHILLGREEN}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN},
         {HSV_CHILLGREEN}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN},
         {HSV_CHILLGREEN}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN}, {HSV_CHILLGREEN}
-    },
-    [_FN1] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_MINTGREEN}, {HSV_RED}, {HSV_CHILLGREEN},
-        {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_MINTGREEN}, {HSV_OFF}
     },
     [_FN2] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_RED},
@@ -286,8 +295,9 @@ bool rgb_matrix_indicators_user(void) {
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_BASE] = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_CYCLE_LAYERS_L, KC_CYCLE_LAYERS_R), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
-    [_FN]   = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_FN1]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [_ARROW]   = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [PYCHARM]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [_FN]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FN2]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
 #endif
