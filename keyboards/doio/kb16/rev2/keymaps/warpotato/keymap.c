@@ -138,7 +138,7 @@ Push rollers start at top left
 */
     /*  Row:    0        1        2        3        4       */
     [SONAR] = LAYOUT(
-                C(KC_KP_DOT), C(KC_KP_MINUS), C(KC_KP_PLUS), _______, S(KC_F8),
+                C(KC_KP_DOT), C(KC_KP_MINUS), C(KC_KP_PLUS), _______, A(KC_KP_0),
                 C(KC_KP_3), C(KC_KP_9), C(KC_KP_6), _______, _______,
                 C(KC_KP_2), C(KC_KP_8), C(KC_KP_5), _______, _______,
                 C(KC_KP_1), C(KC_KP_7), C(KC_KP_4), _______
@@ -345,7 +345,7 @@ bool rgb_matrix_indicators_user(void) {
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_BASE] = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_CYCLE_LAYERS_L, KC_CYCLE_LAYERS_R), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
-    [SONAR]   = { ENCODER_CCW_CW(S(KC_F9), S(KC_F10)), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [SONAR]   = { ENCODER_CCW_CW(A(KC_KP_PLUS), A(KC_KP_MINUS)), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_ARROW]   = { ENCODER_CCW_CW(KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [PYCHARM]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [VSCODE]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
