@@ -138,10 +138,10 @@ Push rollers start at top left
 */
     /*  Row:    0        1        2        3        4       */
     [SONAR] = LAYOUT(
-                C(KC_KP_DOT), C(KC_KP_MINUS), C(KC_KP_PLUS), _______, A(KC_KP_0),
-                C(KC_KP_3), C(KC_KP_9), C(KC_KP_6), _______, _______,
-                C(KC_KP_2), C(KC_KP_8), C(KC_KP_5), _______, _______,
-                C(KC_KP_1), C(KC_KP_7), C(KC_KP_4), _______
+                A(KC_BSLS), A(KC_KP_SLASH), A(KC_KP_ASTERISK), _______, A(KC_KP_0),
+                A(KC_KP_3), A(KC_KP_9), A(KC_KP_6), _______, _______,
+                A(KC_KP_2), A(KC_KP_8), A(KC_KP_5), _______, _______,
+                A(KC_KP_1), A(KC_KP_7), A(KC_KP_4), _______
             ),
     /*  Row:    0        1        2        3        4       */
     [_ARROW] = LAYOUT(
