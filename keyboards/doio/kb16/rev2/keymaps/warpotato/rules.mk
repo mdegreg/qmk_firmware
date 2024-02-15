@@ -21,3 +21,4 @@ OS_SWAP_CMD_KEY_ENABLE = no
 
 SRC += dances.c
 SRC += os_swap.c
+SRC += dances_user.c
