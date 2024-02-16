@@ -5,6 +5,7 @@ enum tap_dance_codes {
   DNC_RIGHT,
   DNC_PLUS,
   DNC_MINUS,
+  DNC_SUPER_ALT_TAB,
   /*
   ** Do not change or move from bottom of enum. **
 

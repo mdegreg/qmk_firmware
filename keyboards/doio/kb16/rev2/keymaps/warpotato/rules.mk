@@ -16,9 +16,5 @@ LTO_ENABLE = yes
 DEFERRED_EXEC_ENABLE = yes
 
 # custom behavior
-SUPER_ALT_TAB_ENABLE = no
-OS_SWAP_CMD_KEY_ENABLE = no
-
-SRC += dances.c
-SRC += os_swap.c
-SRC += dances_user.c
+SUPER_ALT_TAB_ENABLE = yes
+OS_SWAP_CMD_KEY_ENABLE = yes

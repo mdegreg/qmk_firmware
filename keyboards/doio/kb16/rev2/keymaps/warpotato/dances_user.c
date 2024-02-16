@@ -9,6 +9,7 @@
 #include "dances.h"
 #include "dances_user.h"
 #include "os_swap.h"
+#include "alttab.h"
 
 tap_dance_action_t tap_dance_actions[];
 tap dance_state[MAX_COUNT_TAPDANCES];
@@ -86,9 +87,22 @@ void dance_minus_reset(tap_dance_state_t* state, void* user_data) {
     );
 }
 
+void on_super_alt_tab(tap_dance_state_t *state, void *user_data) {
+    alt_tab_tap(state);
+}
+
+void super_alt_tab_finished(tap_dance_state_t *state, void *user_data) {
+    alt_tab_finished(&(dance_state[DNC_SUPER_ALT_TAB]), state);
+}
+
+void super_alt_tab_reset(tap_dance_state_t *state, void *user_data) {
+    alt_tab_reset(&(dance_state[DNC_SUPER_ALT_TAB]), state);
+}
+
 tap_dance_action_t tap_dance_actions[] = {
         [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
         [DNC_PLUS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_plus, dance_plus_finished, dance_plus_reset),
         [DNC_MINUS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_minus, dance_minus_finished, dance_minus_reset),
+        [DNC_SUPER_ALT_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(on_super_alt_tab, super_alt_tab_finished, super_alt_tab_reset),
 };

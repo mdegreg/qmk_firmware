@@ -21,7 +21,7 @@ Push rollers start at top left
                 KC_0,     KC_DOT,  KC_BSPC,   KC_ENT
             ),
     [NAVARROW] = LAYOUT(
-                KC_HOME,     _______,    KC_PGUP,    _______,     KC_MUTE,
+                KC_HOME,     _______,    KC_PGUP,    TD(DNC_SUPER_ALT_TAB),     KC_MUTE,
                 S(C(KC_TAB)),     _______,    C(KC_TAB),    KC_BSPC,      _______,
                 KC_END,     KC_UP,    KC_PGDN,    KC_ENT,          _______,
                 KC_LEFT,     KC_DOWN,  KC_RIGHT,   _______

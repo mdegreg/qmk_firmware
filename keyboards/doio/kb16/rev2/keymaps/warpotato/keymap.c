@@ -20,6 +20,7 @@
 // OLED animation
 #include "./lib/layer_status/layer_status.h"
 
+#include "alttab.h"
 #include "os_swap.h"
 #include "dances.h"
 #include "dances_user.h"
@@ -179,6 +180,10 @@ bool rgb_matrix_indicators_user(void) {
         rgb_matrix_set_color_all(0, 0, 0);
     }
     return false;
+}
+
+void matrix_scan_user(void) { // The very important timer.
+    timeout_super_alt_tab();
 }
 
 #ifdef ENCODER_MAP_ENABLE
