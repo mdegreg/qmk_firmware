@@ -28,9 +28,9 @@ Push rollers start at top left
             ),
     /*  Row:    0        1        2        3        4       */
     [_ARROW] = LAYOUT(
-                _______, _______, _______, _______, KC_MUTE,
-                _______, _______, _______, _______, _______,
-                _______, KC_UP,   C(KC_C), KC_ENT, _______,
+                _______, _______, KC_PGUP, TD(DNC_SUPER_ALT_TAB), KC_MUTE,
+                S_CTRL_TAB_R,     _______,    S_CTRL_TAB, _______, _______,
+                C(KC_C), KC_UP,   KC_PGDN, KC_ENT, _______,
                 TD(DNC_LEFT), KC_DOWN, TD(DNC_RIGHT), _______
             ),
 
