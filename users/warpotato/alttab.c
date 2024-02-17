@@ -48,18 +48,6 @@ void timeout_super_alt_tab(void) {
     }
   }
 }
-// because alt tab is effortful, and i needed to figure out
-// how more complex behaviors work within qmk
-void alt_tab_tap(tap_dance_state_t *state) {
-    if(state->count == 3) {
-        trigger_super_alt_tab(true);
-        trigger_super_alt_tab(true);
-        trigger_super_alt_tab(true);
-    }
-    if(state->count > 3) {
-        trigger_super_alt_tab(true);
-    }
-}
 
 void alt_tab_finished(tap *tap_state, tap_dance_state_t *state) {
     tap_state->step = dance_step(state);
@@ -68,8 +56,6 @@ void alt_tab_finished(tap *tap_state, tap_dance_state_t *state) {
         #ifdef OS_SWAP_CMD_KEY_ENABLE
         case SINGLE_HOLD: register_code16(os_showallwins_key); break;
         #endif
-        case DOUBLE_TAP: trigger_super_alt_tab(true); trigger_super_alt_tab(true); break;
-        case DOUBLE_SINGLE_TAP: trigger_super_alt_tab(true); trigger_super_alt_tab(true);
     }
 }
 
@@ -80,8 +66,6 @@ void alt_tab_reset(tap *tap_state, tap_dance_state_t *state) {
         #ifdef OS_SWAP_CMD_KEY_ENABLE
         case SINGLE_HOLD: unregister_code16(os_showallwins_key); break;
         #endif
-        case DOUBLE_TAP: trigger_super_alt_tab(false); break;
-        case DOUBLE_SINGLE_TAP: trigger_super_alt_tab(false); break;
     }
     tap_state->step = 0;
 }

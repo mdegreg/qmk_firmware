@@ -20,10 +20,23 @@
 // OLED animation
 #include "./lib/layer_status/layer_status.h"
 
+#ifdef SUPER_ALT_TAB_ENABLE
 #include "alttab.h"
+#endif
+
+#ifdef SUPER_CTRL_TAB_ENABLE
+#include "ctrltab.h"
+#endif
+
+#ifdef OS_SWAP_CMD_KEY_ENABLE
 #include "os_swap.h"
+#endif
+
+#ifdef TAP_DANCE_ENABLE
 #include "dances.h"
 #include "dances_user.h"
+#endif
+
 #include "layers_user.h"
 #include "layout_user.h"
 #include "ledmap_user.h"
@@ -40,6 +53,7 @@ uint8_t mod_config(uint8_t mod) {
 }
 
 
+#ifdef OS_SWAP_CMD_KEY_ENABLE
 uint32_t os_detection_callback(uint32_t trigger_time, void* cb_arg) {
   os_variant_t current_os = detected_host_os();
   if (current_os == OS_MACOS) {
@@ -49,7 +63,7 @@ uint32_t os_detection_callback(uint32_t trigger_time, void* cb_arg) {
   }
   return 0;
 }
-
+#endif
 
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
@@ -61,7 +75,9 @@ void keyboard_post_init_user(void) {
     #endif
   #endif
   rgb_matrix_enable();
+  #ifdef OS_SWAP_CMD_KEY_ENABLE
   defer_exec(1000, os_detection_callback, NULL);
+  #endif
   #if CONSOLE_ENABLE
 
     uprintf("OS: %2u\n",
@@ -90,6 +106,7 @@ void keyboard_post_init_user(void) {
 #endif
 
 
+#ifdef ENCODER_MAP_ENABLE
 void on_cw_spin(void);
 void on_ccw_spin(void);
 
@@ -110,10 +127,13 @@ void on_ccw_spin(void) {
       }
       layer_move(next_layer);
 }
+#endif
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+  
+#ifdef ENCODER_MAP_ENABLE
     case KC_CYCLE_LAYERS_R:
       // Our logic will happen on presses, nothing is done on releases
       if (!record->event.pressed) {
@@ -128,6 +148,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       on_ccw_spin();
       return false;
+#endif
     case VSC_PUSH:
       if (!record->event.pressed) {
         return false;
@@ -146,6 +167,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       SEND_STRING(SS_LALT("gu"));
       return false;
+#ifdef SUPER_CTRL_TAB_ENABLE
+    case S_CTRL_TAB_R:
+      if (!record->event.pressed) {
+        return false;
+      }
+      trigger_super_ctrl_tab(true);
+      return false;
+    case S_CTRL_TAB:
+      if (!record->event.pressed) {
+        return false;
+      }
+      trigger_super_ctrl_tab(false);
+      return false;
+#endif
 
     // Process other keycodes normally
     default:
@@ -183,7 +218,13 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 void matrix_scan_user(void) { // The very important timer.
+
+#ifdef SUPER_ALT_TAB_ENABLE
     timeout_super_alt_tab();
+#endif
+#ifdef SUPER_CTRL_TAB_ENABLE
+    timeout_super_ctrl_tab();
+#endif
 }
 
 #ifdef ENCODER_MAP_ENABLE

@@ -22,6 +22,5 @@ void unset_super_alt_tab_init_key(void);
 void trigger_super_alt_tab(bool pressed);
 void timeout_super_alt_tab(void);
 
-void alt_tab_tap(tap_dance_state_t *state);
 void alt_tab_finished(tap *tap_state, tap_dance_state_t *state);
 void alt_tab_reset(tap *tap_state, tap_dance_state_t *state);

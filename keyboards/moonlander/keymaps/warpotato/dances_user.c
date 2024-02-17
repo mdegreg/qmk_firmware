@@ -357,10 +357,6 @@ void dance_bootloader_reset(tap_dance_state_t *state, void *user_data) {
 // a few navigation utils for editing and working with
 // CLI commands
 
-void on_super_alt_tab(tap_dance_state_t *state, void *user_data) {
-    alt_tab_tap(state);
-}
-
 void super_alt_tab_finished(tap_dance_state_t *state, void *user_data) {
     alt_tab_finished(&(dance_state[DNC_SUPER_ALT_TAB]), state);
 }
@@ -479,7 +475,7 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_XCUT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
         [DNC_COPY] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
         [DNC_CPS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_5, dance_5_finished, dance_5_reset),
-        [DNC_SUPER_ALT_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(on_super_alt_tab, super_alt_tab_finished, super_alt_tab_reset),
+        [DNC_SUPER_ALT_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, super_alt_tab_finished, super_alt_tab_reset),
         [DNC_RTN_L0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_layerswap_finished, dance_layerswap_reset),
         [DNC_CURLY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, curlyswap_finished, curlyswap_reset),
         [DNC_SQUARE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, squareswap_finished, squareswap_reset),

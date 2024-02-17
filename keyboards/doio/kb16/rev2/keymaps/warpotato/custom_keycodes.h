@@ -7,4 +7,6 @@ enum keycodes {
     VSC_COMMIT,
     VSC_PULL,
     MC_ARROW_LOCK,
+    S_CTRL_TAB,
+    S_CTRL_TAB_R,
 };

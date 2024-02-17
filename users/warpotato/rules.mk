@@ -12,6 +12,11 @@ SRC += alttab.c
 OPT_DEFS += -DSUPER_ALT_TAB_ENABLE
 endif
 
+ifeq ($(strip $(SUPER_CTRL_TAB_ENABLE)), yes)
+SRC += ctrltab.c
+OPT_DEFS += -DSUPER_CTRL_TAB_ENABLE
+endif
+
 ifeq ($(strip $(OS_SWAP_CMD_KEY_ENABLE)), yes)
 OPT_DEFS += -DOS_SWAP_CMD_KEY_ENABLE
 SRC += os_swap.c

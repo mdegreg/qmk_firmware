@@ -87,10 +87,6 @@ void dance_minus_reset(tap_dance_state_t* state, void* user_data) {
     );
 }
 
-void on_super_alt_tab(tap_dance_state_t *state, void *user_data) {
-    alt_tab_tap(state);
-}
-
 void super_alt_tab_finished(tap_dance_state_t *state, void *user_data) {
     alt_tab_finished(&(dance_state[DNC_SUPER_ALT_TAB]), state);
 }
@@ -104,5 +100,5 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_ra, dance_ra_finished, dance_ra_reset),
         [DNC_PLUS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_plus, dance_plus_finished, dance_plus_reset),
         [DNC_MINUS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_minus, dance_minus_finished, dance_minus_reset),
-        [DNC_SUPER_ALT_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(on_super_alt_tab, super_alt_tab_finished, super_alt_tab_reset),
+        [DNC_SUPER_ALT_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, super_alt_tab_finished, super_alt_tab_reset),
 };
