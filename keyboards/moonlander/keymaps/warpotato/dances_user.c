@@ -313,6 +313,21 @@ void dance_5_finished(tap_dance_state_t *state, void *user_data) {
 void dance_5_reset(tap_dance_state_t *state, void *user_data) {
     os_modkey_dance_reset(&(dance_state[DNC_CPS]), state, KC_V);
 }
+void on_dance_a(tap_dance_state_t *state, void *user_data);
+void dance_a_finished(tap_dance_state_t *state, void *user_data);
+void dance_a_reset(tap_dance_state_t *state, void *user_data);
+
+void on_dance_a(tap_dance_state_t *state, void *user_data) {
+    os_modkey_on_dance(state, KC_A);
+}
+
+void dance_a_finished(tap_dance_state_t *state, void *user_data) {
+    os_modkey_dance_finished(&(dance_state[DNC_CA]), state, KC_A);
+}
+
+void dance_a_reset(tap_dance_state_t *state, void *user_data) {
+    os_modkey_dance_reset(&(dance_state[DNC_CA]), state, KC_A);
+}
 
 void curlyswap_finished(tap_dance_state_t *state, void *user_data);
 void curlyswap_reset(tap_dance_state_t *state, void *user_data);
@@ -489,4 +504,5 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_BRC] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_brc, dance_brc_finished, dance_brc_reset),
         [DNC_PAREN] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_paren, dance_paren_finished, dance_paren_reset),
         [DNC_GMODESWAP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_gameswap_finished, dance_gameswap_reset),
+        [DNC_CA] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_a, dance_a_finished, dance_a_reset),
 };
