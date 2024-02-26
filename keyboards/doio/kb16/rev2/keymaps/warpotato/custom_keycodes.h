@@ -9,4 +9,6 @@ enum keycodes {
     MC_ARROW_LOCK,
     S_CTRL_TAB,
     S_CTRL_TAB_R,
+    STORE_SETUPS,
+    PRINT_SETUPS,
 };

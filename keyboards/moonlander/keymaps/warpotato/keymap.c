@@ -22,6 +22,7 @@
 
 #if CONSOLE_ENABLE
 #include "print.h"
+#include "os_detection.h"
 #endif
 
 #define getarraylength(x) (sizeof(x) / sizeof((x)[0]))
@@ -47,12 +48,6 @@ void keyboard_post_init_user(void) {
   #endif
   rgb_matrix_enable();
   defer_exec(1000, os_detection_callback, NULL);
-  #if CONSOLE_ENABLE
-
-    uprintf("OS: %2u\n",
-            current_os
-    );
-  #endif
 }
 
 void set_layer_color(int layer) {
@@ -168,12 +163,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
   switch (keycode) {
 #if CONSOLE_ENABLE
-    case KC_EQUAL:
+    case STORE_SETUPS:
         if (record->event.pressed) {
             store_setups_in_eeprom();
         }
         return false;
-    case KC_U:
+    case PRINT_SETUPS:
         if (record->event.pressed) {
             print_stored_setups();
         }
