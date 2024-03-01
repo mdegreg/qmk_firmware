@@ -17,7 +17,6 @@
 #include "layers_user.h"
 #include "ledmap_user.h"
 #include "layout_user.h"
-#include "callbacks.h"
 #include "custom_keycodes.h"
 
 #if CONSOLE_ENABLE
@@ -47,7 +46,26 @@ void keyboard_post_init_user(void) {
     #endif
   #endif
   rgb_matrix_enable();
-  defer_exec(1000, os_detection_callback, NULL);
+}
+
+
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    set_os(detected_os);
+    switch (detected_os) {
+        case OS_MACOS:
+        case OS_IOS:
+        
+            layer_on(OS_MAC_LAYOUT);
+            break;
+        case OS_WINDOWS:
+            break;
+        case OS_LINUX:
+            break;
+        case OS_UNSURE:
+            break;
+    }
+
+    return true;
 }
 
 void set_layer_color(int layer) {
