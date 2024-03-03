@@ -17,8 +17,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT,         KC_Q,           KC_W,           KC_E,               KC_R,           KC_T,                           KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                  KC_O,        KC_P,          KC_BSLS,        KC_PGDN,
     KC_CAPS_LOCK,           KC_A,           KC_S,           KC_D,               TD(DNC_FIND),   KC_G,                           KC_H,                           KC_MINUS,   KC_J,        KC_K,                  KC_L,        KC_SCLN,       KC_QUOTE,       KC_TRANSPARENT,
     SC_LSPO,                KC_Z,           TD(DNC_XCUT),   TD(DNC_COPY),       TD(DNC_CPS),    KC_B,                                                                       KC_N,        KC_M,                  KC_COMMA,    KC_DOT,        KC_SLASH,       SC_RSPC,
-    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NUMKEYS_LAYOUT), TD(DNC_LH_FNSWAP),                              TD(DNC_BACKSPACE),              TD(DNC_BACKSPACE),       TD(DNC_RH_FNSWAP),     TD(DNC_BRC), TD(DNC_PAREN), KC_TRANSPARENT, KC_LGUI,
-                                                                                TD(DNC_SPACE),  LT(NUMKEYS_LAYOUT, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
+    MT(MOD_LCTL, KC_GRAVE), KC_LALT,        TD(DNC_RTN_L0), TT(NAV_LAYOUT), TD(DNC_LH_FNSWAP),                              TD(DNC_BACKSPACE),              TT(NAV_LAYOUT),       TD(DNC_RH_FNSWAP),     TD(DNC_BRC), TD(DNC_PAREN), KC_TRANSPARENT, KC_LGUI,
+                                                                                TD(DNC_SPACE),  LT(NAV_LAYOUT, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
       // minor modifications for mac os; most are handled via generic tapdance defs,
@@ -32,14 +32,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MT(MOD_LGUI, KC_GRAVE), KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LCTL,
                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, MT(MOD_LGUI, KC_DOT),   KC_TRANSPARENT
   ),
-  [NUMKEYS_LAYOUT] = LAYOUT_moonlander(
-      // phone-style numpad plus arrowkey layer
-    KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_NUM_LOCK,     KC_KP_SLASH,    KC_KP_ASTERISK, KC_NO,          KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_PGUP,        KC_HOME,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_7,         KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_PGDN,        KC_END,         KC_UP,          C(KC_C),        KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_4,         KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_TRANSPARENT, TD(DNC_LEFT),   KC_DOWN,        TD(DNC_RIGHT),  KC_TRANSPARENT,                                                   KC_TRANSPARENT, KC_KP_1,         KC_KP_2,        KC_KP_3,        KC_KP_ENTER,    KC_TRANSPARENT,
-    KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                   KC_TRANSPARENT,                 KC_KP_0,         KC_KP_0,        KC_KP_DOT,      KC_KP_ENTER,    KC_TRANSPARENT,
-                                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                   KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  [NAV_LAYOUT] = LAYOUT_moonlander(
+    KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_PGUP,        KC_HOME,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,         KC_HOME,        KC_PGUP,        KC_PGDN,        KC_END,         KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_PGDN,        KC_END,         KC_UP,          C(KC_C),        KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,         TD(DNC_LEFT),   KC_UP,          KC_DOWN,        TD(DNC_RIGHT), KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_TRANSPARENT, TD(DNC_LEFT),   KC_DOWN,        TD(DNC_RIGHT),  KC_TRANSPARENT,                                                 KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT,                 KC_TRANSPARENT,                         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,   KC_TRANSPARENT
   ),
   [FKEYS_LAYOUT] = LAYOUT_moonlander(
       // traditional 10 key numpad plus fn-key access, general layout
