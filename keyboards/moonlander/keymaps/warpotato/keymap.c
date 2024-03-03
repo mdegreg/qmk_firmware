@@ -85,7 +85,7 @@ void set_layer_color(int layer) {
   }
 }
 
-HSV os_color_win = {HSV_RED};
+HSV os_color_win = {HSV_CORAL};
 HSV os_color_mac = {HSV_CHILLGREEN};
 HSV (*os_indicator_hsv_color) = {&os_color_win};
 
@@ -141,9 +141,15 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             (os_indicator_rgb_color).b
         );
     };
-    if (layer_state_is(NUMKEYS_LAYOUT)) {
+    if (layer_state_is(NAV_LAYOUT)) {
         rgb_matrix_set_color(
             19,
+            (os_indicator_rgb_color).r,
+            (os_indicator_rgb_color).g,
+            (os_indicator_rgb_color).b
+        );
+        rgb_matrix_set_color(
+            71,
             (os_indicator_rgb_color).r,
             (os_indicator_rgb_color).g,
             (os_indicator_rgb_color).b

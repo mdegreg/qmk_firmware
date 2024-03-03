@@ -2,6 +2,7 @@
 
 enum tap_dance_codes {
   DNC_ESC_LS,
+  DNC_NUMNAV,
   DNC_FIND,
   DNC_XCUT,
   DNC_COPY,
