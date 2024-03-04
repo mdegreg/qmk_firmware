@@ -14,12 +14,9 @@ enum tap_dance_codes {
   DNC_BOOTLOADER,
   DNC_SPACE,
   DNC_RH_FNSWAP,
-  DNC_LH_FNSWAP,
   DNC_BACKSPACE,
   DNC_LEFT,
   DNC_RIGHT,
-  DNC_BRC,
-  DNC_PAREN,
   DNC_GMODESWAP,
   DNC_CA,
   /*
