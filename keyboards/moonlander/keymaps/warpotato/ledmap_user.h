@@ -35,7 +35,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
         // thumb keys
         {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE}, // 70
-        {HSV_WHITE}  // right red key, 71
+        {HSV_REDKEYWHITE}  // right red key, 71
     },
 
     [OS_MAC_LAYOUT] = {
@@ -57,7 +57,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
         {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
-        {HSV_WHITE}
+        {HSV_REDKEYWHITE}
     },
 
     [NAV_LAYOUT] = {
@@ -79,7 +79,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_WHITE}
+        {HSV_REDKEYWHITE}
     },
 
     [NUMKEYS_LAYOUT] = {
@@ -123,7 +123,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_CHILLGREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
         {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
         {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
-        {HSV_RED}
+        {HSV_REDKEYWHITE}
     },
 
     [GAMING_LAYOUT] = {

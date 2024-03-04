@@ -80,6 +80,7 @@
 #define HSV_COOLWHITE 132,89,255
 #define HSV_PALEMAGENTA 213,175,255
 #define HSV_PALEORANGE 10,175,255
+#define HSV_REDKEYWHITE 128, 220, 255
 
 // clang-format on
 
