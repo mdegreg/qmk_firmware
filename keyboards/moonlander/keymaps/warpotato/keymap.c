@@ -148,12 +148,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             (os_indicator_rgb_color).g,
             (os_indicator_rgb_color).b
         );
-        rgb_matrix_set_color(
-            71,
-            (os_indicator_rgb_color).r,
-            (os_indicator_rgb_color).g,
-            (os_indicator_rgb_color).b
-        );
     };
     if (get_highest_layer(layer_state) != UTIL_LAYOUT) {
         rgb_matrix_set_color(
