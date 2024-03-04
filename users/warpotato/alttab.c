@@ -3,7 +3,6 @@
 #include QMK_KEYBOARD_H
 #endif
 
-#include "os_swap.h"
 #include "dances_taptypes.h"
 #include "dances.h"
 
@@ -49,23 +48,19 @@ void timeout_super_alt_tab(void) {
   }
 }
 
-void alt_tab_finished(tap *tap_state, tap_dance_state_t *state) {
+void alt_tab_finished(tap *tap_state, tap_dance_state_t *state, uint16_t mod) {
     tap_state->step = dance_step(state);
     switch (tap_state->step) {
         case SINGLE_TAP: trigger_super_alt_tab(true); break;
-        #ifdef OS_SWAP_CMD_KEY_ENABLE
-        case SINGLE_HOLD: register_code16(os_showallwins_key); break;
-        #endif
+        case SINGLE_HOLD: register_code16(mod); break;
     }
 }
 
-void alt_tab_reset(tap *tap_state, tap_dance_state_t *state) {
+void alt_tab_reset(tap *tap_state, tap_dance_state_t *state, uint16_t mod) {
     wait_ms(10);
     switch (tap_state->step) {
         case SINGLE_TAP: trigger_super_alt_tab(false); break;
-        #ifdef OS_SWAP_CMD_KEY_ENABLE
-        case SINGLE_HOLD: unregister_code16(os_showallwins_key); break;
-        #endif
+        case SINGLE_HOLD: unregister_code16(mod); break;
     }
     tap_state->step = 0;
 }

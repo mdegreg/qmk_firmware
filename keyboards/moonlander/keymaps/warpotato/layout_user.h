@@ -17,13 +17,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRAVE,               KC_Q,           KC_W,           KC_E,               KC_R,           KC_T,                           KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                  KC_O,        KC_P,          KC_BSLS,        KC_PGDN,
     KC_CAPS_LOCK,           KC_A,           KC_S,           KC_D,               TD(DNC_FIND),   KC_G,                           KC_H,                           KC_MINUS,   KC_J,        KC_K,                  KC_L,        KC_SCLN,       KC_QUOTE,       KC_TRANSPARENT,
     SC_LSPO,                KC_Z,           TD(DNC_XCUT),   TD(DNC_COPY),       TD(DNC_CPS),    KC_B,                                                                       KC_N,        KC_M,                  KC_COMMA,    KC_DOT,        KC_SLASH,       SC_RSPC,
-    KC_TRANSPARENT,         KC_LALT,        TD(DNC_RTN_L0), TD(DNC_SPACE),      LT(FKEYS_LAYOUT, KC_TAB),                              TD(DNC_BACKSPACE),              TT(NAV_LAYOUT),       TD(DNC_RH_FNSWAP),     TD(DNC_BRC), TD(DNC_PAREN), KC_TRANSPARENT, KC_LGUI,
+    KC_TRANSPARENT,         KC_LALT,        TD(DNC_RTN_L0), TD(DNC_SPACE),      LT(FKEYS_LAYOUT, KC_TAB),            TD(DNC_BACKSPACE),              TT(NUMKEYS_LAYOUT),       TD(DNC_RH_FNSWAP),     TD(DNC_BRC), TD(DNC_PAREN), KC_TRANSPARENT, KC_LGUI,
                                                                                 KC_SPACE,  MT(MOD_LCTL, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),          MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_DOT),  MT(MOD_LSFT, KC_EQUAL)
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
       // minor modifications for mac os; most are handled via generic tapdance defs,
       // but ctrl/cmd swapping and layer switch cue are replaced here for simplicity
-      // keeping this layer is handy for catching and triggering os-specific
+      // keeping this layer is handy for catching and triggering os-specifica
       // keypress interception, even if its mostly duplicative
     KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,

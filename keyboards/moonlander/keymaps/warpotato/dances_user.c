@@ -68,36 +68,6 @@ void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     }
     dance_state[DNC_ESC_LS].step = 0;
 }
-void nav_swap(tap_dance_state_t *state, void *user_data);
-void nav_swap_finished(tap_dance_state_t *state, void *user_data);
-void nav_swap_reset(tap_dance_state_t *state, void *user_data);
-
-void nav_swap(tap_dance_state_t *state, void *user_data) {
-    // noop
-}
-void nav_swap_finished(tap_dance_state_t *state, void *user_data) {
-    dance_state[DNC_NUMNAV].step = dance_step(state);
-    switch (dance_state[DNC_NUMNAV].step) {
-        case SINGLE_TAP: layer_invert(NAV_LAYOUT); break;
-        case SINGLE_HOLD: layer_on(NAV_LAYOUT); break;
-        case DOUBLE_TAP: layer_invert(NUMKEYS_LAYOUT); break;
-    }
-}
-
-void nav_swap_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[DNC_NUMNAV].step) {
-        case SINGLE_TAP:
-            // noop
-            break;
-        case SINGLE_HOLD:
-            layer_off(NAV_LAYOUT);
-            break;
-        case DOUBLE_TAP: 
-            break;
-    }
-    dance_state[DNC_NUMNAV].step = 0;
-}
 
 // allowing for OS swap and return to base layer from
 // higher layers consistently
@@ -360,11 +330,11 @@ void dance_bootloader_reset(tap_dance_state_t *state, void *user_data) {
 // CLI commands
 
 void super_alt_tab_finished(tap_dance_state_t *state, void *user_data) {
-    alt_tab_finished(&(dance_state[DNC_SUPER_ALT_TAB]), state);
+    alt_tab_finished(&(dance_state[DNC_SUPER_ALT_TAB]), state, KC_LALT);
 }
 
 void super_alt_tab_reset(tap_dance_state_t *state, void *user_data) {
-    alt_tab_reset(&(dance_state[DNC_SUPER_ALT_TAB]), state);
+    alt_tab_reset(&(dance_state[DNC_SUPER_ALT_TAB]), state, KC_LALT);
 }
 
 // delete a whole word on hold
@@ -500,7 +470,6 @@ void dance_paren_reset(tap_dance_state_t *state, void *user_data) {
 
 tap_dance_action_t tap_dance_actions[] = {
         [DNC_ESC_LS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
-        [DNC_NUMNAV] = ACTION_TAP_DANCE_FN_ADVANCED(nav_swap, nav_swap_finished, nav_swap_reset),
         [DNC_FIND] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
         [DNC_XCUT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
         [DNC_COPY] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
