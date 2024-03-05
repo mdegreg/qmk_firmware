@@ -403,6 +403,34 @@ void on_dance_space(tap_dance_state_t* state, void* user_data) {
     }
 }
 
+void dance_space_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[DNC_SPACE].step = dance_step(state);
+    switch (dance_state[DNC_SPACE].step) {
+        case SINGLE_TAP:
+            register_code16(KC_UNDS);
+            break;
+        case SINGLE_HOLD: layer_on(NAV_LAYOUT); break;
+        case DOUBLE_TAP:
+        case DOUBLE_SINGLE_TAP:
+            tap_code16(KC_UNDS);
+            register_code16(KC_UNDS);
+    }
+}
+
+void dance_space_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[DNC_SPACE].step) {
+        case SINGLE_TAP:
+            unregister_code16(KC_UNDS);
+            break;
+        case SINGLE_HOLD: layer_off(NAV_LAYOUT); break;
+        case DOUBLE_TAP:
+        case DOUBLE_SINGLE_TAP:
+            unregister_code16(KC_UNDS);
+    }
+    dance_state[DNC_RH_FNSWAP].step = 0;
+}
+
 
 tap_dance_action_t tap_dance_actions[] = {
         [DNC_ESC_LS] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
