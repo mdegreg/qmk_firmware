@@ -344,17 +344,20 @@ uint8_t bspc_dnc_mod_state;
 void on_dance_backspace(tap_dance_state_t* state, void* user_data) {
     bspc_dnc_mod_state = get_mods();
     if (bspc_dnc_mod_state & MOD_MASK_SHIFT) {
-        del_mods(MOD_MASK_SHIFT);
-        unregister_code(MOD_MASK_SHIFT);
         bspc_dnc_key = KC_DEL;
         if (state->count == 3) {
+            del_mods(MOD_MASK_SHIFT);
             tap_code16(bspc_dnc_key);
+            del_mods(MOD_MASK_SHIFT);
             tap_code16(bspc_dnc_key);
+            del_mods(MOD_MASK_SHIFT);
             tap_code16(bspc_dnc_key);
         }
         if (state->count > 3) {
+            del_mods(MOD_MASK_SHIFT);
             tap_code16(bspc_dnc_key);
         }
+        set_mods(bspc_dnc_mod_state);
     } else {
         bspc_dnc_key = KC_BSPC;
         if (state->count == 3) {
@@ -371,21 +374,26 @@ void on_dance_backspace(tap_dance_state_t* state, void* user_data) {
 void dance_backspace_finished(tap_dance_state_t* state, void* user_data) {
     dance_state[DNC_BACKSPACE].step = dance_step(state);
     if (bspc_dnc_mod_state & MOD_MASK_SHIFT) {
-        del_mods(MOD_MASK_SHIFT);
-        unregister_code(MOD_MASK_SHIFT);
         bspc_dnc_key = KC_DEL;
+        
         switch (dance_state[DNC_BACKSPACE].step) {
             case SINGLE_TAP:
+                del_mods(MOD_MASK_SHIFT);
                 register_code16(bspc_dnc_key);
                 break;
             case SINGLE_HOLD:
-                register_code16(os_bksp_mod | bspc_dnc_key);
+                del_mods(MOD_MASK_SHIFT);
+                tap_code16(os_bksp_mod | bspc_dnc_key);
                 break;
             case DOUBLE_TAP:
             case DOUBLE_SINGLE_TAP:
+                del_mods(MOD_MASK_SHIFT);
                 tap_code16(bspc_dnc_key);
+                del_mods(MOD_MASK_SHIFT);
                 register_code16(bspc_dnc_key);
         }
+        
+        set_mods(bspc_dnc_mod_state);
     } else {
         bspc_dnc_key = KC_BSPC;
         switch (dance_state[DNC_BACKSPACE].step) {
@@ -406,7 +414,6 @@ void dance_backspace_reset(tap_dance_state_t* state, void* user_data) {
         case DOUBLE_SINGLE_TAP: unregister_code16(bspc_dnc_key);
     }
     dance_state[DNC_BACKSPACE].step = 0;
-    register_mods(bspc_dnc_mod_state);
     bspc_dnc_key = KC_NO;
 }
 
