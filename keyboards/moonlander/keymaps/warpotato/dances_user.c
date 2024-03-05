@@ -397,7 +397,7 @@ void on_dance_space(tap_dance_state_t *state, void *user_data);
 
 void on_dance_space(tap_dance_state_t* state, void* user_data) {
     if(get_mods() & MOD_MASK_SHIFT) {
-        tap_code16(KC_UNDS);
+        tap_code16(S(KC_MINUS));
     } else {
         tap_code16(KC_SPACE);
     }
