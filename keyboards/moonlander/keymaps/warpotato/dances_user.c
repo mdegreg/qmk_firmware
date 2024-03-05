@@ -384,7 +384,7 @@ void on_dance_ra(tap_dance_state_t* state, void* user_data) {
 void dance_ra_finished(tap_dance_state_t* state, void* user_data) {
     mod_charswap_dance_finished(
         &(dance_state[DNC_RIGHT]), state, KC_RIGHT, KC_RIGHT, os_bksp_mod
-    );
+    );    
 }
 
 void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
@@ -394,46 +394,13 @@ void dance_ra_reset(tap_dance_state_t* state, void* user_data) {
 }
 
 void on_dance_space(tap_dance_state_t *state, void *user_data);
-void dance_space_finished(tap_dance_state_t *state, void *user_data);
-void dance_space_reset(tap_dance_state_t *state, void *user_data);
 
 void on_dance_space(tap_dance_state_t* state, void* user_data) {
-    if(state->count == 3) {
+    if(get_mods() & MOD_MASK_SHIFT) {
         tap_code16(KC_UNDS);
-        tap_code16(KC_UNDS);
-        tap_code16(KC_UNDS);
+    } else {
+        tap_code16(KC_SPACE);
     }
-    if(state->count > 3) {
-        tap_code16(S(KC_UNDS));
-    }
-}
-
-void dance_space_finished(tap_dance_state_t *state, void *user_data) {
-    dance_state[DNC_SPACE].step = dance_step(state);
-    switch (dance_state[DNC_SPACE].step) {
-        case SINGLE_TAP:
-            register_code16(KC_UNDS);
-            break;
-        case SINGLE_HOLD: layer_on(NAV_LAYOUT); break;
-        case DOUBLE_TAP:
-        case DOUBLE_SINGLE_TAP:
-            tap_code16(KC_UNDS);
-            register_code16(KC_UNDS);
-    }
-}
-
-void dance_space_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[DNC_SPACE].step) {
-        case SINGLE_TAP:
-            unregister_code16(KC_UNDS);
-            break;
-        case SINGLE_HOLD: layer_off(NAV_LAYOUT); break;
-        case DOUBLE_TAP:
-        case DOUBLE_SINGLE_TAP:
-            unregister_code16(KC_UNDS);
-    }
-    dance_state[DNC_RH_FNSWAP].step = 0;
 }
 
 
@@ -448,7 +415,7 @@ tap_dance_action_t tap_dance_actions[] = {
         [DNC_CURLY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, curlyswap_finished, curlyswap_reset),
         [DNC_SQUARE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, squareswap_finished, squareswap_reset),
         [DNC_BOOTLOADER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_bootloader_finished, dance_bootloader_reset),
-        [DNC_SPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_space, dance_space_finished, dance_space_reset),
+        [DNC_SPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_space, NULL, NULL),
         [DNC_RH_FNSWAP] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_rh, dance_rh_fnswap_finished, dance_rh_fnswap_reset),
         [DNC_BACKSPACE] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_backspace, dance_backspace_finished, dance_backspace_reset),
         [DNC_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_la, dance_la_finished, dance_la_reset),
