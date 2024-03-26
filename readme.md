@@ -1,3 +1,16 @@
+# Matt's Notes
+Hello there! If you somehow found your way here, and you're interested in poking around, a couple of locations are particularly handy:
+
+## [User folder](users/warpotato) 
+
+This folder contains a bunch of generic functionality I've abstracted away from individual keyboard layouts.
+
+Most of them are utility functions for tapdance functionality, e.g. for implementing keyboard shortcuts. [See here for those.](users/warpotato/dances.h)
+
+There is also an implementation of [super alt-tab](https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab),
+a single-tap alt-tab functionality I used to learn the details of QMK, including OS detection and reactivity, as well as timeout interactions in the QMK 
+context. [Check that out here.](https://github.com/mdegreg/qmk_firmware/blob/master/users/warpotato/alttab.h)
+
 # Quantum Mechanical Keyboard Firmware
 
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
