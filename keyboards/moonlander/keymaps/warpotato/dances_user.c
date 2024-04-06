@@ -37,7 +37,7 @@ void dance_0_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[DNC_ESC_LS].step = dance_step(state);
     switch (dance_state[DNC_ESC_LS].step) {
         case SINGLE_TAP: register_code16(KC_ESCAPE); break;
-        case DOUBLE_TAP: register_code16(KC_ESCAPE); register_code16(KC_ESCAPE); break;
+        case DOUBLE_TAP: tap_code16(KC_ESCAPE); register_code16(KC_ESCAPE); break;
         case DOUBLE_HOLD:
             layer_on(GAMING_LAYOUT);
             break;
