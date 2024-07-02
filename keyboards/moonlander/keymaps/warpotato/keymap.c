@@ -68,6 +68,7 @@ bool process_detected_host_os_user(os_variant_t detected_os) {
     return true;
 }
 
+// layer color and swapping controls
 void set_layer_color(int layer) {
   for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
     HSV hsv = {
@@ -160,6 +161,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return false;
 }
 
+// keystroke processing
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef ORYX_ENABLE
   process_record_oryx(keycode, record);
@@ -200,4 +202,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void matrix_scan_user(void) { // The very important timer.
     timeout_super_alt_tab();
+}
+
+// tapping term control
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SFT_T(KC_SPC):
+            return TAPPING_TERM + 1250;
+        case LT(1, KC_GRV):
+            return 130;
+        default:
+            return TAPPING_TERM;
+    }
 }
