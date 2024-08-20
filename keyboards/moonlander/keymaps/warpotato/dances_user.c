@@ -160,7 +160,7 @@ void dance_gameswap_reset(tap_dance_state_t *state, void *user_data) {
 * These are generally used for general/productivity layers for
 * making various actions and swaps easier to use, and generally
 * being comfier.
-*/1
+*/
 
 // keyboard shortcut triggers on hold
 void on_dance_2(tap_dance_state_t *state, void *user_data);

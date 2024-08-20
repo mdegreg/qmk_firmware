@@ -13,11 +13,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [OS_WIN_LAYOUT] = LAYOUT_moonlander(
       // baseline layout - mostly qwerty, with some keys shifted to emphasize
       // left hand typing + habitual movements
-    TD(DNC_ESC_LS), KC_1,           KC_2,           KC_3,          KC_4,           KC_5,                KC_6,                           KC_BSPC,    KC_7,        KC_8,                      KC_9,        KC_0,    KC_TRANSPARENT, KC_TRANSPARENT,
+    TD(DNC_ESC_LS), KC_1,           KC_2,           KC_3,          KC_4,           KC_5,                KC_6,                           KC_TRANSPARENT,    KC_7,        KC_8,                      KC_9,        KC_0,    KC_TRANSPARENT, KC_TRANSPARENT,
     KC_GRAVE,       KC_Q,           KC_W,           KC_E,          KC_R,           KC_T,                KC_Y,                           KC_EQUAL,   KC_U,        KC_I,                      KC_O,        KC_P,    KC_BSLS,        KC_VOLU,
     KC_CAPS_LOCK,   KC_A,           KC_S,           KC_D,          TD(DNC_FIND),   KC_G,                KC_H,                           KC_MINUS,   KC_J,        KC_K,                      KC_L,        KC_SCLN, KC_QUOTE,       KC_VOLD,
     SC_LSPO,        KC_Z,           TD(DNC_XCUT),   TD(DNC_COPY),  TD(DNC_CPS),    KC_B,                                                            KC_N,        KC_M,                      KC_COMMA,    KC_DOT,  KC_SLASH,       SC_RSPC,
-    KC_TRANSPARENT, KC_TRANSPARENT, TD(DNC_RTN_L0), TT(NAV_LAYOUT), LT(FKEYS_LAYOUT, KC_TAB),           TD(DNC_BACKSPACE),              TT(NUMKEYS_LAYOUT),      LT(FKEYS_LAYOUT, KC_SCLN), KC_LBRC,     KC_RBRC, KC_TRANSPARENT, KC_LGUI,
+    KC_TRANSPARENT, KC_TRANSPARENT, TD(DNC_RTN_L0), LT(NAV_LAYOUT, KC_DEL), LT(FKEYS_LAYOUT, KC_TAB),           TD(DNC_BACKSPACE),              TT(NUMKEYS_LAYOUT),      LT(FKEYS_LAYOUT, KC_SCLN), LT(NAV_LAYOUT, KC_LBRC), KC_RBRC, KC_TRANSPARENT, KC_LGUI,
                                                                    TD(DNC_SPACE),  MT(MOD_LCTL, KC_ENTER),   TD(DNC_SUPER_ALT_TAB),     MT(MOD_LALT, KC_QUOTE),  MT(MOD_LCTL, KC_EQUAL),    MT(MOD_LSFT, KC_TAB)
   ),
   [OS_MAC_LAYOUT] = LAYOUT_moonlander(
@@ -63,8 +63,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // eliminating most tapdance options to reduce input lag.
       // set up to allow easy access for number and fn key layers
     KC_ESCAPE,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
-    KC_TAB,            KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_7,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
-    TD(DNC_GMODESWAP), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_8,                           KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TAB,            KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,
+    TD(DNC_GMODESWAP), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,     KC_F,           KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_LSFT,           KC_TRANSPARENT, KC_X,           KC_C,               KC_V,           KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_LCTL,           KC_LALT,        KC_TRANSPARENT, MO(NUMKEYS_GAMING), MO(FKEYS_GAMING),               KC_BSPC,                        KC_BSPC,                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                            KC_SPACE,       KC_ENTER,       KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT

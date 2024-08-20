@@ -14,7 +14,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ORANGE}, {HSV_WHITE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_OFF}, // 4
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF}, // 9
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_CORAL}, // 14
-        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 19
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_RED}, // 19
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE}, // 24
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 28
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, // 31
@@ -31,7 +31,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 55
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 60
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 64
-        {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW}, // 67
+        {HSV_OFF}, {HSV_YELLOW}, {HSV_YELLOW}, // 67
 
         // thumb keys
         {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE}, // 70
@@ -42,7 +42,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ORANGE}, {HSV_WHITE}, {HSV_LIGHTBLUE}, {HSV_MAGENTA}, {HSV_OFF},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_CHILLGREEN},
-        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_RED},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_LIGHTBLUE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE},
@@ -55,7 +55,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
+        {HSV_OFF}, {HSV_YELLOW}, {HSV_YELLOW},
         {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
         {HSV_REDKEYWHITE}
     },
@@ -68,16 +68,18 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_OFF}, {HSV_OFF}, {HSV_RED}, {HSV_MINTGREEN}, {HSV_WHITE},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+
         {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
         {HSV_RED},
 
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_ORANGE}, {HSV_WHITE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_GREEN}, {HSV_WHITE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_GREEN}, {HSV_WHITE}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_ORANGE}, {HSV_WHITE}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_ORANGE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_GREEN}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_GREEN}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
+        {HSV_OFF}, {HSV_ORANGE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
         {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
+
         {HSV_CHILLGREEN}, {HSV_OFF}, {HSV_OFF},
         {HSV_REDKEYWHITE}
     },
@@ -121,7 +123,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_CHILLGREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_CHILLGREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF}, {HSV_OFF},
         {HSV_CHILLGREEN}, {HSV_ICEBLUE}, {HSV_MINTGREEN}, {HSV_OFF},
-        {HSV_RED}, {HSV_YELLOW}, {HSV_YELLOW},
+        {HSV_OFF}, {HSV_YELLOW}, {HSV_YELLOW},
         {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE},
         {HSV_REDKEYWHITE}
     },
@@ -133,19 +135,21 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_RED}, {HSV_WHITE}, {HSV_COOLWHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_COOLWHITE},
         {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE},
-        {HSV_ICEBLUE}, {HSV_ICEBLUE}, {HSV_ICEBLUE},
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE},
         {HSV_LIGHTBLUE}, {HSV_CHILLGREEN}, {HSV_WHITE},
         {HSV_RED},
 
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}
+        {HSV_OFF}, {HSV_CYAN}, {HSV_CORAL}, {HSV_MAGENTA}, {HSV_RED}, // 40
+        {HSV_OFF}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF}, // 45
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 50
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 55
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 60
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 64
+        {HSV_OFF}, {HSV_YELLOW}, {HSV_YELLOW}, // 67
+
+        // thumb keys
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE}, // 70
+        {HSV_REDKEYWHITE}  // right red key, 71
     },
 
     [GAMINGFAST_LAYOUT] = {
@@ -159,15 +163,17 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         {HSV_LIGHTBLUE}, {HSV_ORANGE}, {HSV_CHILLGREEN},
         {HSV_RED},
 
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}
+        {HSV_OFF}, {HSV_CYAN}, {HSV_CORAL}, {HSV_MAGENTA}, {HSV_RED}, // 40
+        {HSV_OFF}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_OFF}, // 45
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 50
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 55
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 60
+        {HSV_ICEBLUE}, {HSV_WHITE}, {HSV_WHITE}, {HSV_WHITE}, // 64
+        {HSV_OFF}, {HSV_YELLOW}, {HSV_YELLOW}, // 67
+
+        // thumb keys
+        {HSV_MAGENTA}, {HSV_ORANGE}, {HSV_ORANGE}, // 70
+        {HSV_REDKEYWHITE}  // right red key, 7
     },
 
     [FKEYS_GAMING] = {
